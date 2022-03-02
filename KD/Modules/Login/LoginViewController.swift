@@ -30,6 +30,7 @@ class LoginViewController: BaseViewController {
         textField.borderStyle = .roundedRect
         textField.placeholder = "Email"
         textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }()
     

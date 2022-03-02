@@ -19,7 +19,8 @@ struct API {
     //MARK: - Business API
     struct User { }
     
-    struct Post { }
+    struct Authen { }
+    
     
     static var cancellables = Set<AnyCancellable>()
 }

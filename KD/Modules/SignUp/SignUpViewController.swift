@@ -29,7 +29,8 @@ class SignUpViewController: BaseViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Email"
-        textField.keyboardType = .phonePad
+        textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -99,8 +100,8 @@ class SignUpViewController: BaseViewController {
         usernameTextField.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
-//        usernameTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
-//        usernameTextField.delegate = self
+        usernameTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
+        usernameTextField.delegate = self
         
         vStackContainer.addArrangedSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
@@ -179,9 +180,11 @@ class SignUpViewController: BaseViewController {
                     self?.showAlert(imageName: nil, title: "Alert", message: message, positiveTitleButton: nil, positiveCompletion: nil)
                     
                 } else if case .didSignUpSuccess = state {
-                    DispatchQueue.main.async {
-//                        self?.gotoConfirmCode()
-                    }
+                    self?.showAlert(title: "Alert", message: "Register success, please login.", positiveTitleButton: nil, positiveCompletion: { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.navigationController?.popViewController(animated: true)
+                        }
+                    })
                     
                 }
             }.store(in: &subscriptions)
@@ -222,6 +225,31 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    @objc
+    func textFieldEditingDidChange(_ textField: UITextField) {
+#if DEBUG
+        if textField == usernameTextField {
+            let phoneString = textField.text?.trim()
+            switch phoneString {
+            case "11":
+                let username = "test0203@gmail.com"
+                let password = "1q2w"
+
+                textField.text = username
+                passwordTextField.text = password
+                signUpButton.isEnabled = true
+                signUpButton.alpha = 1.0
+                
+                viewModel.username = username
+                viewModel.password = password
+
+            default:()
+            }
+        }
+#endif
+
     }
         
 }

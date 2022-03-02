@@ -36,10 +36,8 @@
 		3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145327CF572D007A05B8 /* PasswordTextField.swift */; };
 		3B0E145827CF5DA9007A05B8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */; };
 		3B0E145927CF5DA9007A05B8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */; };
-		3B0E146327CF6091007A05B8 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145C27CF6091007A05B8 /* PostModel.swift */; };
 		3B0E146427CF6091007A05B8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145D27CF6091007A05B8 /* UserModel.swift */; };
 		3B0E146527CF6091007A05B8 /* API.Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145F27CF6091007A05B8 /* API.Request.swift */; };
-		3B0E146627CF6091007A05B8 /* API.Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146027CF6091007A05B8 /* API.Post.swift */; };
 		3B0E146727CF6091007A05B8 /* API.User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146127CF6091007A05B8 /* API.User.swift */; };
 		3B0E146827CF6091007A05B8 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146227CF6091007A05B8 /* API.swift */; };
 		3B0E146C27CF640D007A05B8 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146A27CF640D007A05B8 /* ProductCellViewModel.swift */; };
@@ -55,6 +53,11 @@
 		3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148027CF6DD7007A05B8 /* NoResultView.swift */; };
 		3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */; };
 		3B0E148527CF87F4007A05B8 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148427CF87F4007A05B8 /* Debounce.swift */; };
+		3B0E148727CFAC5B007A05B8 /* LoginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148627CFAC5B007A05B8 /* LoginInfo.swift */; };
+		3B0E148927CFAC71007A05B8 /* RegisterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */; };
+		3B0E148B27CFAD10007A05B8 /* API.Authen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148A27CFAD10007A05B8 /* API.Authen.swift */; };
+		3B0E148D27CFAE75007A05B8 /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */; };
+		3B0E148F27CFAE8F007A05B8 /* RegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -115,10 +118,8 @@
 		3B0E145327CF572D007A05B8 /* PasswordTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		3B0E145C27CF6091007A05B8 /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		3B0E145D27CF6091007A05B8 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3B0E145F27CF6091007A05B8 /* API.Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.Request.swift; sourceTree = "<group>"; };
-		3B0E146027CF6091007A05B8 /* API.Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.Post.swift; sourceTree = "<group>"; };
 		3B0E146127CF6091007A05B8 /* API.User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.User.swift; sourceTree = "<group>"; };
 		3B0E146227CF6091007A05B8 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3B0E146A27CF640D007A05B8 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
@@ -134,6 +135,11 @@
 		3B0E148027CF6DD7007A05B8 /* NoResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
 		3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarTxt.swift; sourceTree = "<group>"; };
 		3B0E148427CF87F4007A05B8 /* Debounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		3B0E148627CFAC5B007A05B8 /* LoginInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInfo.swift; sourceTree = "<group>"; };
+		3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfo.swift; sourceTree = "<group>"; };
+		3B0E148A27CFAD10007A05B8 /* API.Authen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.Authen.swift; sourceTree = "<group>"; };
+		3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
+		3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponseModel.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -322,8 +328,11 @@
 		3B0E145B27CF6091007A05B8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				3B0E145C27CF6091007A05B8 /* PostModel.swift */,
 				3B0E145D27CF6091007A05B8 /* UserModel.swift */,
+				3B0E148627CFAC5B007A05B8 /* LoginInfo.swift */,
+				3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */,
+				3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */,
+				3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -332,8 +341,8 @@
 			isa = PBXGroup;
 			children = (
 				3B0E145F27CF6091007A05B8 /* API.Request.swift */,
-				3B0E146027CF6091007A05B8 /* API.Post.swift */,
 				3B0E146127CF6091007A05B8 /* API.User.swift */,
+				3B0E148A27CFAD10007A05B8 /* API.Authen.swift */,
 				3B0E146227CF6091007A05B8 /* API.swift */,
 			);
 			path = API;
@@ -677,11 +686,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B0E148D27CFAE75007A05B8 /* LoginResponseModel.swift in Sources */,
 				3B0E146727CF6091007A05B8 /* API.User.swift in Sources */,
 				3B0E147727CF6CFF007A05B8 /* HeaderFooterSection.swift in Sources */,
 				3B0E147627CF6CFF007A05B8 /* RegularTableViewCell.swift in Sources */,
 				3B0E145027CF54ED007A05B8 /* ConfigurationHelper.swift in Sources */,
-				3B0E146327CF6091007A05B8 /* PostModel.swift in Sources */,
+				3B0E148B27CFAD10007A05B8 /* API.Authen.swift in Sources */,
 				3B0E144327CF5421007A05B8 /* LoginViewController.swift in Sources */,
 				3B0E146D27CF640D007A05B8 /* ProductTableViewCell.swift in Sources */,
 				3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */,
@@ -689,6 +699,7 @@
 				3B0E13AB27CF4047007A05B8 /* UIImageView_EXT.swift in Sources */,
 				3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */,
 				3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */,
+				3B0E148927CFAC71007A05B8 /* RegisterInfo.swift in Sources */,
 				3B0E139827CF3DF9007A05B8 /* ProductsViewController.swift in Sources */,
 				3B0E13AA27CF4047007A05B8 /* UITextField.Publisher.swift in Sources */,
 				3B0E144E27CF54ED007A05B8 /* ValidationService.swift in Sources */,
@@ -696,7 +707,6 @@
 				3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */,
 				3B0E138227CF38C5007A05B8 /* AppNavigationController.swift in Sources */,
 				3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */,
-				3B0E146627CF6091007A05B8 /* API.Post.swift in Sources */,
 				3B0E144227CF5421007A05B8 /* LoginViewModel.swift in Sources */,
 				3B0E144C27CF54ED007A05B8 /* UserDefaultsHelper.swift in Sources */,
 				3B0E146F27CF64DA007A05B8 /* ProductsViewModel.swift in Sources */,
@@ -723,8 +733,10 @@
 				3B0E146C27CF640D007A05B8 /* ProductCellViewModel.swift in Sources */,
 				3B0E13B327CF415A007A05B8 /* VW_LoadingAnimation.swift in Sources */,
 				3B0E13AD27CF4047007A05B8 /* UIViewController_EXT.swift in Sources */,
+				3B0E148F27CFAE8F007A05B8 /* RegisterResponseModel.swift in Sources */,
 				3B0E148527CF87F4007A05B8 /* Debounce.swift in Sources */,
 				3B0E146827CF6091007A05B8 /* API.swift in Sources */,
+				3B0E148727CFAC5B007A05B8 /* LoginInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

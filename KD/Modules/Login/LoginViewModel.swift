@@ -223,14 +223,16 @@ final class LoginViewModel {
                 print(string)
                 do {
                     let decoder = JSONDecoder()
-                    let responeModel = try decoder.decode(ResponseModel.self, from: data)
-                    print("token", responeModel.token ?? "")
+                    let responeModel = try decoder.decode(LoginResponseModel.self, from: data)
+                    //print("token", responeModel.token ?? "")
                     if let token = responeModel.token {
                         self.state.send(.loginSuccess)
                         UserDefaultsHelper.setData(value: token, key: .token)
                     } else {
                         if let error = responeModel.error {
                             self.state.send(.error(message: error))
+                        } else {
+                            self.state.send(.error(message: string))
                         }
                     }
                 } catch {
@@ -253,7 +255,7 @@ final class LoginViewModel {
         guard let postData = try? encoder.encode(user) else {
             throw APIError.invalidResponse
         }
-        guard let url = URL(string: API.Config.endPointURL+"auth/login") else {
+        guard let url = URL(string: API.Authen.EndPoint.login.urlString) else {
             throw APIError.invalidURL
         }
         var request = URLRequest(url: url,
@@ -269,7 +271,3 @@ final class LoginViewModel {
     
 }
 
-struct LoginInfo: Codable {
-    let email: String
-    let password: String
-}
