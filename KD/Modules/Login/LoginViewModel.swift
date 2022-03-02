@@ -243,10 +243,6 @@ final class LoginViewModel {
         })
             .store(in: &dataCancellable)
         
-
     }
-    
-    
-    
 }
 

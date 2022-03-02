@@ -378,7 +378,6 @@ class ProductsViewController: BaseViewController {
     @objc private func gotoLoginButtonTapped(sender: UIButton) {
         let viewController = LoginViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
-      
     }
     
     @objc private func gotoLogoutButtonTapped(sender: UIButton) {
@@ -388,9 +387,8 @@ class ProductsViewController: BaseViewController {
     }
     
     @objc private func gotoAddProductButtonTapped(sender: UIButton) {
-        
-        // TODO: - Handle logout
-        DLog("Handle gotoAddProductButtonTapped")
+        let viewController = AddProductViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
 }

@@ -15,6 +15,7 @@ extension API.Product {
         
         case listProduct
         case delete
+        case addProduct
         
         var urlString: String {
             switch self {
@@ -22,6 +23,8 @@ extension API.Product {
                 return API.Config.endPointURL + "items"
             case .delete:
                 return API.Config.endPointURL + "item/delete"
+            case .addProduct:
+                return API.Config.endPointURL + "item/add"
             }
         }
         
@@ -64,6 +67,32 @@ extension API.Product {
             throw APIError.invalidResponse
         }
         guard let url = URL(string: API.Product.EndPoint.delete.urlString) else {
+            throw APIError.invalidURL
+        }
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData as Data
+
+        let session = URLSession.shared
+        return session.dataTaskPublisher(for: request)
+    }
+    
+    static func postAddProduct(productInfo: AddProductInfo) throws -> URLSession.DataTaskPublisher {
+        var headers = [
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+        ]
+        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+            headers["Authorization"] = "Bearer " + token
+        }
+        let encoder = JSONEncoder()
+        guard let postData = try? encoder.encode(productInfo) else {
+            throw APIError.invalidResponse
+        }
+        guard let url = URL(string: API.Product.EndPoint.addProduct.urlString) else {
             throw APIError.invalidURL
         }
         var request = URLRequest(url: url,
