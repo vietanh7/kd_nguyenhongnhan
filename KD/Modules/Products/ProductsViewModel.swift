@@ -30,9 +30,11 @@ final class ProductsViewModel {
     
     // Action
     enum Action {
+        case onAppear
         case onRefreshData
         case onLoadMoreData
         case onUpdateFavorite(dataModel: UserModel, atIndex: Int)
+        case onLogout
     }
     
     
@@ -40,6 +42,8 @@ final class ProductsViewModel {
     // Publisher & store
     @Published var listModels: [UserModel] = []
     @Published var isLoading: Bool = false
+    
+    @Published var isLoggedIn: Bool = false
     
     // Actions
     let action = PassthroughSubject<Action, Never>()
@@ -70,6 +74,11 @@ final class ProductsViewModel {
     // process Action
     private func processAction(_ action: Action) {
         switch action {
+        case .onAppear:
+            onAppear()
+        
+            
+            
         case .onRefreshData:
             print("ViewModel -> View")
             self.onRefreshData()
@@ -82,6 +91,8 @@ final class ProductsViewModel {
             print("ViewModel -> View")
             self.onUpdateFavorite(dataModel: dataModel, atIndex: index)
             
+        case .onLogout:
+            self.onLogout()
         }
     }
     
@@ -112,6 +123,19 @@ final class ProductsViewModel {
     private var limit = Limit
     var isNoMoreData = false
     var dataLoaded = false
+    
+    private func onLogout() {
+        UserDefaultsHelper.signOut()
+        self.isLoggedIn = false
+    }
+    
+    private func onAppear() {
+        if UserDefaultsHelper.isLoggedIn() {
+            self.isLoggedIn = true
+        } else {
+            self.isLoggedIn = false
+        }
+    }
     
     private func onRefreshData() {
         self.getListData(offset: 0, limit: self.limit, fetchDataType: .refreshData)

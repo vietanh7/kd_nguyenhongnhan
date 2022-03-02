@@ -122,6 +122,8 @@ class ProductsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         _NavController.setNavigationBarHidden(false, animated: true)
+        
+        viewModel.action.send(.onAppear)
     }
     
     
@@ -238,6 +240,22 @@ class ProductsViewController: BaseViewController {
         setupTableView()
     }
     
+    private func setupUILoggedIn() {
+        self.gotoLoginButton.isHidden = true
+        self.gotoSignUpButton.isHidden = true
+        self.gotoLogoutButton.isHidden = false
+        self.gotoAddProductButton.alpha = 1.0
+        self.gotoAddProductButton.isUserInteractionEnabled = true
+    }
+    
+    private func setupUILogout() {
+        self.gotoLoginButton.isHidden = false
+        self.gotoSignUpButton.isHidden = false
+        self.gotoLogoutButton.isHidden = true
+        self.gotoAddProductButton.alpha = 0.5
+        self.gotoAddProductButton.isUserInteractionEnabled = false
+    }
+    
     //MARK: Binding
     override func bindingToView() {
         
@@ -258,6 +276,16 @@ class ProductsViewController: BaseViewController {
                     self.showLoading()
                 } else {
                     self.hideLoading()
+                }
+            })
+            .store(in: &subscriptions)
+        
+        viewModel.$isLoggedIn
+            .sink(receiveValue: { isLoggedIn in
+                if isLoggedIn {
+                    self.setupUILoggedIn()
+                } else {
+                    self.setupUILogout()
                 }
             })
             .store(in: &subscriptions)
@@ -360,8 +388,8 @@ class ProductsViewController: BaseViewController {
     
     @objc private func gotoLogoutButtonTapped(sender: UIButton) {
         
-        // TODO: - Handle logout
-        DLog("Handle logout")
+        viewModel.action.send(.onLogout)
+        
     }
     
     @objc private func gotoAddProductButtonTapped(sender: UIButton) {
