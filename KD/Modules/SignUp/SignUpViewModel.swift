@@ -156,7 +156,7 @@ final class SignUpViewModel {
 
         let registerInfo = RegisterInfo(email: username ?? "", password: password ?? "")
 
-        let postUserPublisher = try? postUserRegister(user: registerInfo)
+        let postUserPublisher = try? API.Authen.postUserRegister(user: registerInfo)
 
         _ = postUserPublisher?
             .sink(receiveCompletion: { (completion) in
@@ -191,28 +191,7 @@ final class SignUpViewModel {
     }
 
     
-    func postUserRegister(user: RegisterInfo) throws -> URLSession.DataTaskPublisher {
-        let headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-        ]
-        let encoder = JSONEncoder()
-        guard let postData = try? encoder.encode(user) else {
-            throw APIError.invalidResponse
-        }
-        guard let url = URL(string: API.Authen.EndPoint.register.urlString) else {
-            throw APIError.invalidURL
-        }
-        var request = URLRequest(url: url,
-                                 cachePolicy: .useProtocolCachePolicy,
-                                 timeoutInterval: 10.0)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        request.httpBody = postData as Data
-
-        let session = URLSession.shared
-        return session.dataTaskPublisher(for: request)
-    }
+    
 }
 
 

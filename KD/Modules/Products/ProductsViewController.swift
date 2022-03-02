@@ -201,19 +201,16 @@ class ProductsViewController: BaseViewController {
         gotoSignUpButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        //gotoLoginButton.isHidden = false
 
         hStackButtons.addArrangedSubview(gotoLoginButton)
         gotoLoginButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        //gotoLoginButton.isHidden = false
         
         hStackButtons.addArrangedSubview(gotoLogoutButton)
         gotoLogoutButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        gotoLogoutButton.isHidden = true
         
         
         // adding & search
@@ -234,7 +231,6 @@ class ProductsViewController: BaseViewController {
             make.top.bottom.equalTo(0)
             make.width.equalTo(150)
         }
-        //gotoAddProductButton.alpha = 0.5
         
         setupTableView()
     }
@@ -336,9 +332,9 @@ class ProductsViewController: BaseViewController {
         
         
         var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
-        var footer: ESRefreshProtocol & ESRefreshAnimatorProtocol
+//        var footer: ESRefreshProtocol & ESRefreshAnimatorProtocol
         header = ESRefreshHeaderAnimator.init(frame: CGRect.zero)
-        footer = ESRefreshFooterAnimator.init(frame: CGRect.zero)
+//        footer = ESRefreshFooterAnimator.init(frame: CGRect.zero)
         
         self.tableView.es.addPullToRefresh(animator: header) { [weak self] in
             self?.refreshData()

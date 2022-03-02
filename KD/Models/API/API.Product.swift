@@ -25,4 +25,29 @@ extension API.Product {
     }
     
     
+    static func getProducts() throws -> URLSession.DataTaskPublisher {
+        
+        var headers = [
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        ]
+        if UserDefaultsHelper.isLoggedIn() {
+            if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+                headers["Authorization"] = "Bearer " + token
+            }
+        }
+        
+        guard let url = URL(string: API.Product.EndPoint.listProduct.urlString) else {
+            throw APIError.invalidURL
+        }
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+
+        let session = URLSession.shared
+        return session.dataTaskPublisher(for: request)
+    }
+    
 }

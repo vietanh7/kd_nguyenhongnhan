@@ -76,8 +76,6 @@ final class ProductsViewModel {
         switch action {
         case .onAppear:
             onAppear()
-        
-            
             
         case .onRefreshData:
             print("ViewModel -> View")
@@ -85,7 +83,7 @@ final class ProductsViewModel {
             
         case .onLoadMoreData:
             print("ViewModel -> View")
-            self.onLoadMoreData()
+            //self.onLoadMoreData()
             
         case .onUpdateFavorite(let dataModel, let index):
             print("ViewModel -> View")
@@ -138,11 +136,7 @@ final class ProductsViewModel {
     }
     
     private func onRefreshData() {
-        self.getListData(offset: 0, limit: self.limit, fetchDataType: .refreshData)
-    }
-    
-    private func onLoadMoreData() {
-//        self.getListData(offset: self.offset, limit: self.limit, fetchDataType: .loadMoreData)
+        self.getListData()
     }
     
     
@@ -156,63 +150,10 @@ final class ProductsViewModel {
     }
     
     
-//    private func getListData(offset: Int, limit: Int, fetchDataType: FetchDataType) {
-//        dataCancellable = []
-//        API.getListObject(endPoint: API.Product.EndPoint.listProduct.urlString, type: ProductModel.self)
-//            .sink { completion in
-//                switch completion {
-//                case .failure(let err):
-//                    print("Error is \(err.localizedDescription)")
-//
-//                    //self.delegate?.didGetErrorMessage?(errorMessage: err.localizedDescription)
-//
-//                    let mess = err.localizedDescription
-//                    self.state.send(.error(message: mess))
-//
-//                case .finished:
-//                    print("Finished")
-//
-//                }
-//            } receiveValue: {  [weak self] models in
-//                guard let self = self else { return }
-//
-//                self.isNoMoreData = models.isEmpty ? true : false
-//
-////                let results = models.map({ (user) -> ProductModel in
-////                    user.avatarUrl = "https://picsum.photos/200?index=\(user.id)"
-////                    return user
-////                })
-//
-//                // reload UI
-//                self.dataLoaded = true
-//                if fetchDataType == .refreshData {
-//                    self.listModels = models
-//
-//                    self.state.send(.didRefreshDataSuccess)
-//                } else {
-//                    self.listModels.append(contentsOf: models)
-//
-//                    self.state.send(.didLoadMoreDataSuccess)
-//                }
-//
-//                // MUST set value for offset here b/c after that the list maybe delete item
-//                self.offset = self.listModels.count
-//
-//                //let data = try! JSONEncoder().encode(self.listModels[0])
-//                //print(String(data: data, encoding: .utf8)!)
-//            }
-//            .store(in: &dataCancellable)
-//
-//    }
-    
-    
-    
-    
-    
-    private func getListData(offset: Int, limit: Int, fetchDataType: FetchDataType) {
+    private func getListData() {
         dataCancellable = []
 
-        let getProductPublisher = try? getProducts()
+        let getProductPublisher = try? API.Product.getProducts()
 
         _ = getProductPublisher?
             .sink(receiveCompletion: { (completion) in
@@ -237,15 +178,9 @@ final class ProductsViewModel {
                     
                     // reload UI
                     self.dataLoaded = true
-                    if fetchDataType == .refreshData {
-                        self.listModels = models
+                    self.listModels = models
 
-                        self.state.send(.didRefreshDataSuccess)
-                    } else {
-                        self.listModels.append(contentsOf: models)
-
-                        self.state.send(.didLoadMoreDataSuccess)
-                    }
+                    self.state.send(.didRefreshDataSuccess)
 
                 } catch {
                     print(error)
@@ -254,35 +189,8 @@ final class ProductsViewModel {
             }
         })
             .store(in: &dataCancellable)
-        
-
     }
     
-    // With Combine we return a DataTaskPublisher instead of using the completion handler of the DataTask
-    func getProducts() throws -> URLSession.DataTaskPublisher {
-        
-        var headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache"
-        ]
-        if UserDefaultsHelper.isLoggedIn() {
-            if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
-                headers["Authorization"] = "Bearer " + token
-            }
-        }
-        
-        guard let url = URL(string: API.Product.EndPoint.listProduct.urlString) else {
-            throw APIError.invalidURL
-        }
-        var request = URLRequest(url: url,
-                                 cachePolicy: .useProtocolCachePolicy,
-                                 timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-
-        let session = URLSession.shared
-        return session.dataTaskPublisher(for: request)
-    }
 }
 
 //MARK: - TableView
