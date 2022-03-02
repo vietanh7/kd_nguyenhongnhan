@@ -7,18 +7,23 @@ target 'KD' do
 
   # Pods for KD
 
+  # Pods for Demo-Combine
   pod 'SnapKit',                  '5.0.1'
   pod 'SWRevealViewController',   '2.3.0'
-  pod 'NVActivityIndicatorView',  '5.1.1'
-
+  
   pod 'Alamofire',                '5.2.0'
   pod 'ObjectMapper',             '4.2.0'
+  pod 'SDWebImage',               '5.7.3'
+  pod 'OneSignalXCFramework',     '>= 3.0.0', '< 4.0'
+  
+  pod 'NVActivityIndicatorView',  '5.1.1'
+  pod 'BadgeHub',                 '1.0.0'
   pod 'IQKeyboardManagerSwift',   '6.5.6'
   pod 'SkeletonView',             '1.11.0'
   pod 'ESPullToRefresh'
   pod 'SwiftEntryKit', '2.0.0'
   pod 'KRProgressHUD'
-  pod 'SDWebImage',               '5.7.3'
+  pod 'PhoneNumberKit',           '3.3.3'
   pod 'ReachabilitySwift'
 
   target 'KDTests' do

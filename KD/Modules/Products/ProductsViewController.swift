@@ -6,11 +6,21 @@
 //
 
 import UIKit
+import ESPullToRefresh
+import SkeletonView
+import Combine
 
 class ProductsViewController: BaseViewController {
 
-    let scrollView = UIScrollView()
+    //let scrollView = UIScrollView()
     let contentView = UIView()
+    
+    private var headerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
     
     let vStackContainer: UIStackView = {
         let vStack = UIStackView()
@@ -22,6 +32,15 @@ class ProductsViewController: BaseViewController {
         return vStack
     }()
     
+    let hStackButtons: UIStackView = {
+        let hStack = UIStackView()
+        hStack.axis = .horizontal
+        hStack.alignment = .trailing
+        hStack.distribution = .fillEqually
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        hStack.spacing = 1
+        return hStack
+    }()
     let gotoSignUpButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemPurple
@@ -45,6 +64,12 @@ class ProductsViewController: BaseViewController {
         return button
     }()
     
+    
+    
+    private let tableView       = UITableView()
+    // MARK: - Properties
+    let viewModel = ProductsViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,6 +83,48 @@ class ProductsViewController: BaseViewController {
         _NavController.setNavigationBarHidden(false, animated: true)
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData() // if cell layout error
+        // disable scroll when show skeleton
+        tableView.isScrollEnabled = (viewModel.dataLoaded == false) ? false : true
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    deinit {
+    }
+    
+    // MARK: Private Helper Methods
+    
+    private func refreshData() {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            //self.viewModel.onRefreshData()
+            self.viewModel.action.send(.onRefreshData)
+        }
+        
+    }
+    
+    private func loadMoreData() {
+        if viewModel.isNoMoreData == false {
+            //viewModel.onLoadMoreData()
+            viewModel.action.send(.onLoadMoreData)
+        } else {
+            self.tableView.es.noticeNoMoreData()
+        }
+    }
+    
+    //MARK: - Config View
+    override func setupData() {
+        super.setupData()
+        
+        viewModel.action.send(.onRefreshData)
+    }
+    
     override func setupUI() {
         super.setupUI()
         
@@ -66,39 +133,26 @@ class ProductsViewController: BaseViewController {
         
         title = "Products"
         
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
-            $0.left.bottom.right.equalToSuperview()
+        view.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(0)
+            make.left.right.equalToSuperview()
+            //make.height.equalTo(50)
         }
         
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
-            //$0.height.equalTo(1500)
-        }
-        
-        contentView.addSubview(vStackContainer)
+        headerView.addSubview(vStackContainer)
         vStackContainer.snp.makeConstraints { make in
-            make.edges.equalTo(UIEdgeInsets(top: 100, left: 15, bottom: 0, right: 15))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15))
         }
         
         
         // hStask: contain button register/login
         // MARK: - hStackButtons
-        let hStackButtons: UIStackView = {
-            let hStack = UIStackView()
-            hStack.axis = .horizontal
-            hStack.alignment = .trailing
-            hStack.distribution = .fillEqually
-            hStack.translatesAutoresizingMaskIntoConstraints = false
-            hStack.spacing = 1
-            return hStack
-        }()
+        
         vStackContainer.addArrangedSubview(hStackButtons)
         hStackButtons.snp.makeConstraints { make in
             make.left.right.equalTo(0)
+            make.height.equalTo(40)
         }
 
         hStackButtons.addArrangedSubview(gotoSignUpButton)
@@ -114,7 +168,114 @@ class ProductsViewController: BaseViewController {
         }
         
         
+        setupTableView()
+    }
+    
+    //MARK: Binding
+    override func bindingToView() {
         
+        viewModel.$listModels
+            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .sink { [unowned self] values in
+                print("receiver values = ", values.count)
+                print("table reload with ", viewModel.listModels.count)
+
+                self.tableView.reloadData()
+            }
+            .store(in: &subscriptions)
+        
+        // show/hide loading
+        viewModel.$isLoading
+            .sink(receiveValue: { isLoading in
+                if isLoading {
+                    self.showLoading()
+                } else {
+                    self.hideLoading()
+                }
+            })
+            .store(in: &subscriptions)
+    }
+    
+    override func bindingToViewModel() {
+        
+    }
+    
+    //MARK: - Navigation
+    override func router() {
+        viewModel.state
+            .sink { [weak self] state in
+                
+                switch state {
+                case .error(let message):
+                    self?.showAlert(imageName: nil, title: "Alert", message: message, positiveTitleButton: nil, positiveCompletion: nil)
+                    
+                case .didRefreshDataSuccess:
+                    self?.didRefreshDataSuccess()
+                    
+                case .didLoadMoreDataSuccess:
+                    self?.didLoadMoreDataSuccess()
+                    
+                case .didUpdateDataSuccess(let dataModel, let atIndex):
+                    self?.didUpdateDataSuccess(dataModel: dataModel, atIndex: atIndex)
+                    
+                default:
+                    break
+                }
+            }.store(in: &subscriptions)
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        //tableView.separatorStyle = .none
+        //tableView.backgroundColor = .white
+        tableView.sectionFooterHeight = 0
+        tableView.register(SkeletonTableViewCell.self, forCellReuseIdentifier: "SkeletonTableViewCell")
+        tableView.register(ProductTableViewCell.self, forCellReuseIdentifier: "ProductTableViewCell")
+        
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(headerView.snp.bottom).offset(10)
+            make.left.bottom.right.equalToSuperview()
+        }
+        
+        
+        var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        var footer: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        header = ESRefreshHeaderAnimator.init(frame: CGRect.zero)
+        footer = ESRefreshFooterAnimator.init(frame: CGRect.zero)
+        
+        self.tableView.es.addPullToRefresh(animator: header) { [weak self] in
+            self?.refreshData()
+        }
+        self.tableView.es.addInfiniteScrolling(animator: footer) { [weak self] in
+            self?.loadMoreData()
+        }
+        self.tableView.refreshIdentifier = "UsersIndentifier"
+        self.tableView.expiredTimeInterval = 20.0
+        
+        // TODO: - sample start to get data
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            //self.tableView.es.autoPullToRefresh()
+        }
+        
+        tableView.isSkeletonable = true
+    }
+    
+    private func didDeleteCellAtIndex(index: Int) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [IndexPath.init(row: index, section: 0)], with: .fade)
+            self.tableView.endUpdates()
+            
+            self.tableView.reloadData()
+            if self.viewModel.listModels.count == 0 {
+                self.tableView.showNoResultView()
+            } else {
+                self.tableView.restoreNoResultView()
+            }
+        }
     }
     
     // MARK: - Actions
@@ -133,3 +294,172 @@ class ProductsViewController: BaseViewController {
     
 
 }
+extension ProductsViewController {
+    func didRefreshDataSuccess() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2 , execute: {
+            self.tableView.es.stopPullToRefresh()
+            //self.tableView.reloadData()
+            self.tableView.isScrollEnabled = true
+            
+            //self.viewModel.arrayModels.removeAll()
+            if self.viewModel.listModels.count == 0 {
+                self.tableView.showNoResultView()
+            } else {
+                self.tableView.restoreNoResultView()
+            }
+        })
+    }
+    
+    func didLoadMoreDataSuccess() {
+        DispatchQueue.main.async {
+            self.tableView.es.stopLoadingMore()
+            //self.tableView.reloadData()
+            self.tableView.isScrollEnabled = true
+        }
+    }
+    
+    func didUpdateDataSuccess(dataModel: UserModel, atIndex: Int) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.reloadRows(at: [IndexPath.init(row: atIndex, section: 0)], with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
+}
+
+//MARK: - ProductTableViewCellDelegate
+extension ProductsViewController: ProductTableViewCellDelegate {
+    
+    func onSelectButtonTapped(dataModel: UserModel, index: Int) {
+        
+        // TODO: - Goto Detail Product
+//        // way 2:
+//        let viewController = PostsTableViewController(userId: dataModel.id)
+        
+//        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func onUpdateFavoriteButtonTapped(dataModel: UserModel, index: Int) {
+        //viewModel.onUpdateFavorite(dataModel: dataModel, atIndex: index)
+        viewModel.action.send(.onUpdateFavorite(dataModel: dataModel, atIndex: index))
+    }
+    
+    func onAvatarImageViewTapped(dataModel: UserModel, index: Int) {
+        print("onAvatarImageViewTapped")
+    }
+}
+
+// MARK: - SkeletonTableViewDataSource, SkeletonTableViewDelegate
+extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if viewModel.dataLoaded == true {
+            return viewModel.numberOfRows(in: section)
+        } else {
+            return 10
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if viewModel.dataLoaded {
+            guard 0..<(self.viewModel.listModels.count) ~= indexPath.row else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath as IndexPath)
+                return cell
+            }
+            
+            //let cellData = listModels[indexPath.row]
+            let cellData = self.viewModel.productCellViewModel(at: indexPath).product
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell", for: indexPath) as! ProductTableViewCell
+            cell.setupData(data: cellData, index: indexPath.row)
+            cell.delegate = self
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SkeletonTableViewCell", for: indexPath) as! SkeletonTableViewCell
+            return cell
+        }
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "SkeletonTableViewCell"
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+        return nil
+    }
+
+    func collectionSkeletonView(_ skeletonView: UITableView, prepareCellForSkeleton cell: UITableViewCell, at indexPath: IndexPath) {
+    }
+
+    // MARK: - Header section
+    
+//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, identifierForHeaderInSection section: Int) -> ReusableHeaderFooterIdentifier? {
+        if viewModel.dataLoaded {
+            return "HeaderIdentifier"
+        } else {
+            return "SkeletonHeaderFooterSection"
+        }
+    }
+
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if viewModel.dataLoaded {
+//            let header = tableView
+//                .dequeueReusableHeaderFooterView(withIdentifier: "HeaderIdentifier") as! HeaderFooterSection
+//            header.titleLabel.text = "header -> \(section)"
+//            return header
+//        } else {
+//            let header = tableView
+//                .dequeueReusableHeaderFooterView(withIdentifier: "SkeletonHeaderFooterSection") as! SkeletonHeaderFooterSection
+//            return header
+//        }
+//    }
+
+    // MARK: - Footer section
+    // not work because using loadmore footer
+    func collectionSkeletonView(_ skeletonView: UITableView, identifierForFooterInSection section: Int) -> ReusableHeaderFooterIdentifier? {
+        if viewModel.dataLoaded {
+            return "FooterIdentifier"
+        } else {
+            return nil
+        }
+    }
+
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        if viewModel.dataLoaded {
+//            let footer = tableView
+//                .dequeueReusableHeaderFooterView(withIdentifier: "FooterIdentifier") as! HeaderFooterSection
+//            footer.titleLabel.text = "footer -> \(section)"
+//            return footer
+//        } else {
+//            return nil
+//        }
+//    }
+}
+
+////MARK: - DetailViewModelOutput
+//extension ProductsViewController: DetailViewControllerDelegate {
+//    func onUpdateFavoriteButtonTapped(dataModel: BasicModel) {
+//        print("onUpdateFavoriteButtonTapped")
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
+//    }
+//
+//    func onDeleteButtonTapped(dataModel: BasicModel) {
+//        if let index = viewModel.listModels.firstIndex(where: {$0 === dataModel}) {
+//            viewModel.listModels.remove(at: index)
+//            //self.didDeleteCellAtIndex(index: index)
+//        }
+//    }
+//}
