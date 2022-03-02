@@ -72,6 +72,39 @@ class ProductsViewController: BaseViewController {
         return button
     }()
     
+    let hStackAdding: UIStackView = {
+        let hStack = UIStackView()
+        hStack.axis = .horizontal
+        hStack.alignment = .trailing
+        hStack.distribution = .fillProportionally
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        hStack.spacing = 5
+        return hStack
+    }()
+    
+    let searchBar: SearchBarTxt = {
+        let searchBar = SearchBarTxt()
+        searchBar.placeholder = NSLocalizedString("Search By SKU", comment: "")
+        searchBar.backgroundColor = .white
+        searchBar.textColor = .black
+        searchBar.layer.cornerRadius = 20
+        searchBar.returnKeyType = .search
+        searchBar.setShadow()
+        return searchBar
+    }()
+    
+    let gotoAddProductButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        button.setTitle("Add Product", for: .normal)
+        button.addTarget(self, action: #selector(gotoAddProductButtonTapped(sender:)), for: .touchUpInside)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10.0
+        return button
+    }()
+
+
     
     
     private let tableView       = UITableView()
@@ -167,19 +200,40 @@ class ProductsViewController: BaseViewController {
         gotoSignUpButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        //gotoLoginButton.isHidden = true
+        //gotoLoginButton.isHidden = false
 
         hStackButtons.addArrangedSubview(gotoLoginButton)
         gotoLoginButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        //gotoLoginButton.isHidden = true
+        //gotoLoginButton.isHidden = false
         
         hStackButtons.addArrangedSubview(gotoLogoutButton)
         gotoLogoutButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
         }
-        gotoLogoutButton.isHidden = false
+        gotoLogoutButton.isHidden = true
+        
+        
+        // adding & search
+        vStackContainer.addArrangedSubview(hStackAdding)
+        hStackAdding.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.height.equalTo(40)
+        }
+        
+        hStackAdding.addArrangedSubview(searchBar)
+        searchBar.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(0)
+        }
+        searchBar.delegate = self
+
+        hStackAdding.addArrangedSubview(gotoAddProductButton)
+        gotoAddProductButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(0)
+            make.width.equalTo(150)
+        }
+        //gotoAddProductButton.alpha = 0.5
         
         setupTableView()
     }
@@ -308,6 +362,12 @@ class ProductsViewController: BaseViewController {
         
         // TODO: - Handle logout
         DLog("Handle logout")
+    }
+    
+    @objc private func gotoAddProductButtonTapped(sender: UIButton) {
+        
+        // TODO: - Handle logout
+        DLog("Handle gotoAddProductButtonTapped")
     }
     
 }
@@ -448,3 +508,46 @@ extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableView
 //        }
 //    }
 //}
+
+extension ProductsViewController: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let searchText:String = textField.text ?? ""
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
+//            self.interactor.searchListFriend(searchText)
+        }
+    }
+    
+    @objc func textFieldDidEndEditing(_ textField: UITextField) {
+        let searchText:String = textField.text ?? ""
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
+//            self.interactor.searchListFriend(searchText)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        let searchText:String = textField.text ?? ""
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
+//            self.interactor.searchListFriend(searchText)
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let searchText:String = textField.text ?? ""
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
+//            self.interactor.searchListFriend(searchText)
+        }
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        let searchText:String = ""
+        self.searchBar.text = ""
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
+//            self.interactor.searchListFriend(searchText)
+        }
+        return false
+    }
+}

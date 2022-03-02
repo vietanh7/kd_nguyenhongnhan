@@ -53,6 +53,8 @@
 		3B0E147C27CF6D4B007A05B8 /* UITableView_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E147B27CF6D4B007A05B8 /* UITableView_EXT.swift */; };
 		3B0E147F27CF6DAD007A05B8 /* BasicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E147E27CF6DAD007A05B8 /* BasicModel.swift */; };
 		3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148027CF6DD7007A05B8 /* NoResultView.swift */; };
+		3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */; };
+		3B0E148527CF87F4007A05B8 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148427CF87F4007A05B8 /* Debounce.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -130,6 +132,8 @@
 		3B0E147B27CF6D4B007A05B8 /* UITableView_EXT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView_EXT.swift; sourceTree = "<group>"; };
 		3B0E147E27CF6DAD007A05B8 /* BasicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicModel.swift; sourceTree = "<group>"; };
 		3B0E148027CF6DD7007A05B8 /* NoResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
+		3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarTxt.swift; sourceTree = "<group>"; };
+		3B0E148427CF87F4007A05B8 /* Debounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				3B0E148027CF6DD7007A05B8 /* NoResultView.swift */,
 				3B0E145327CF572D007A05B8 /* PasswordTextField.swift */,
 				3B0E13B227CF415A007A05B8 /* VW_LoadingAnimation.swift */,
+				3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 		3B0E144427CF54ED007A05B8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3B0E148427CF87F4007A05B8 /* Debounce.swift */,
 				3B0E144527CF54ED007A05B8 /* LoggerHelper.swift */,
 				3B0E144627CF54ED007A05B8 /* UserDefaultsHelper.swift */,
 				3B0E144827CF54ED007A05B8 /* ValidationService.swift */,
@@ -681,6 +687,7 @@
 				3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */,
 				3B0E13AC27CF4047007A05B8 /* UIFont_EXT.swift in Sources */,
 				3B0E13AB27CF4047007A05B8 /* UIImageView_EXT.swift in Sources */,
+				3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */,
 				3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */,
 				3B0E139827CF3DF9007A05B8 /* ProductsViewController.swift in Sources */,
 				3B0E13AA27CF4047007A05B8 /* UITextField.Publisher.swift in Sources */,
@@ -716,6 +723,7 @@
 				3B0E146C27CF640D007A05B8 /* ProductCellViewModel.swift in Sources */,
 				3B0E13B327CF415A007A05B8 /* VW_LoadingAnimation.swift in Sources */,
 				3B0E13AD27CF4047007A05B8 /* UIViewController_EXT.swift in Sources */,
+				3B0E148527CF87F4007A05B8 /* Debounce.swift in Sources */,
 				3B0E146827CF6091007A05B8 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
