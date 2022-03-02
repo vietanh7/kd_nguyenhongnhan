@@ -12,6 +12,18 @@ extension API {
     
     static func getListObject<T: Decodable>(endPoint: String, id: Int? = nil, type: T.Type) -> Future<[T], Error> {
         return Future<[T], Error> { promise in
+            
+            var headers = [
+                "Content-Type": "application/json",
+                "cache-control": "no-cache"
+            ]
+            if UserDefaultsHelper.isLoggedIn() {
+                if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+                    headers["Authorization"] = "Bearer " + token
+                }
+            }
+            
+            
             guard let url = URL(string: endPoint) else {
                 return promise(.failure(APIError.invalidURL))
             }

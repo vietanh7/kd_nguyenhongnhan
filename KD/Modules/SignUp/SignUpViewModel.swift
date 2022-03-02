@@ -183,6 +183,7 @@ final class SignUpViewModel {
                     }
                 } catch {
                     print(error)
+                    self.state.send(.error(message: error.localizedDescription))
                 }
             }
         })

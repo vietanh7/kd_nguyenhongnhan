@@ -237,6 +237,7 @@ final class LoginViewModel {
                     }
                 } catch {
                     print(error)
+                    self.state.send(.error(message: error.localizedDescription))
                 }
             }
         })

@@ -13,8 +13,8 @@ private let regularConfig = UIImage.SymbolConfiguration(weight: .regular)
 private let semiBoldConfig = UIImage.SymbolConfiguration(weight: .semibold)
 
 protocol ProductTableViewCellDelegate: AnyObject {
-    func onSelectButtonTapped(dataModel: UserModel, index: Int)
-    func onDeleteButtonTapped(dataModel: UserModel, index: Int)
+    func onSelectButtonTapped(dataModel: ProductModel, index: Int)
+    func onDeleteButtonTapped(dataModel: ProductModel, index: Int)
 }
 
 class ProductTableViewCell: UITableViewCell {
@@ -110,15 +110,15 @@ class ProductTableViewCell: UITableViewCell {
     
     // MARK: - didSet DataModel
     var index: Int? = nil
-    var dataModel: UserModel? {
+    var dataModel: ProductModel? {
         didSet{
             
 //            print("Called after setting the new value")
             guard let dataModel = dataModel else {
                 return
             }
-            titleLabel.text = "Index \(dataModel.id)"
-            subTitleLabel.text =  dataModel.name
+            titleLabel.text = "SKU: \(dataModel.sku)"
+            subTitleLabel.text =  dataModel.product_name
         }
         willSet(myNewValue) {
 
@@ -270,7 +270,7 @@ class ProductTableViewCell: UITableViewCell {
         subTitleLabel.text = ""
     }
     
-    public func setupData(data: UserModel, index: Int) {
+    public func setupData(data: ProductModel, index: Int) {
         self.dataModel =  data
         self.index = index
     }

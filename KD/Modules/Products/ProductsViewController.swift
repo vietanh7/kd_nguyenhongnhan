@@ -154,7 +154,6 @@ class ProductsViewController: BaseViewController {
     
     private func loadMoreData() {
         if viewModel.isNoMoreData == false {
-            //viewModel.onLoadMoreData()
             viewModel.action.send(.onLoadMoreData)
         } else {
             self.tableView.es.noticeNoMoreData()
@@ -344,11 +343,11 @@ class ProductsViewController: BaseViewController {
         self.tableView.es.addPullToRefresh(animator: header) { [weak self] in
             self?.refreshData()
         }
-        self.tableView.es.addInfiniteScrolling(animator: footer) { [weak self] in
-            self?.loadMoreData()
-        }
-        self.tableView.refreshIdentifier = "UsersIndentifier"
-        self.tableView.expiredTimeInterval = 20.0
+//        self.tableView.es.addInfiniteScrolling(animator: footer) { [weak self] in
+//            self?.loadMoreData()
+//        }
+//        self.tableView.refreshIdentifier = "UsersIndentifier"
+//        self.tableView.expiredTimeInterval = 20.0
         
         // TODO: - sample start to get data
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -425,7 +424,7 @@ extension ProductsViewController {
         }
     }
     
-    func didUpdateDataSuccess(dataModel: UserModel, atIndex: Int) {
+    func didUpdateDataSuccess(dataModel: ProductModel, atIndex: Int) {
         DispatchQueue.main.async {
             self.tableView.beginUpdates()
             self.tableView.reloadRows(at: [IndexPath.init(row: atIndex, section: 0)], with: .automatic)
@@ -438,7 +437,7 @@ extension ProductsViewController {
 //MARK: - ProductTableViewCellDelegate
 extension ProductsViewController: ProductTableViewCellDelegate {
     
-    func onSelectButtonTapped(dataModel: UserModel, index: Int) {
+    func onSelectButtonTapped(dataModel: ProductModel, index: Int) {
         
         // TODO: - Goto Detail Product
 //        // way 2:
@@ -448,7 +447,7 @@ extension ProductsViewController: ProductTableViewCellDelegate {
         print("onSelectButtonTapped")
     }
     
-    func onDeleteButtonTapped(dataModel: UserModel, index: Int) {
+    func onDeleteButtonTapped(dataModel: ProductModel, index: Int) {
 //        viewModel.action.send(.onUpdateFavorite(dataModel: dataModel, atIndex: index))
         print("onDeleteButtonTapped")
 

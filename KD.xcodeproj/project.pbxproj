@@ -58,6 +58,8 @@
 		3B0E148B27CFAD10007A05B8 /* API.Authen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148A27CFAD10007A05B8 /* API.Authen.swift */; };
 		3B0E148D27CFAE75007A05B8 /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */; };
 		3B0E148F27CFAE8F007A05B8 /* RegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */; };
+		3B0E149127CFB6E9007A05B8 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149027CFB6E9007A05B8 /* ProductModel.swift */; };
+		3B0E149327CFB7C7007A05B8 /* API.Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149227CFB7C7007A05B8 /* API.Product.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -140,6 +142,8 @@
 		3B0E148A27CFAD10007A05B8 /* API.Authen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.Authen.swift; sourceTree = "<group>"; };
 		3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
 		3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponseModel.swift; sourceTree = "<group>"; };
+		3B0E149027CFB6E9007A05B8 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		3B0E149227CFB7C7007A05B8 /* API.Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.Product.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 				3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */,
 				3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */,
 				3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */,
+				3B0E149027CFB6E9007A05B8 /* ProductModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 				3B0E145F27CF6091007A05B8 /* API.Request.swift */,
 				3B0E146127CF6091007A05B8 /* API.User.swift */,
 				3B0E148A27CFAD10007A05B8 /* API.Authen.swift */,
+				3B0E149227CFB7C7007A05B8 /* API.Product.swift */,
 				3B0E146227CF6091007A05B8 /* API.swift */,
 			);
 			path = API;
@@ -711,10 +717,12 @@
 				3B0E144C27CF54ED007A05B8 /* UserDefaultsHelper.swift in Sources */,
 				3B0E146F27CF64DA007A05B8 /* ProductsViewModel.swift in Sources */,
 				3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */,
+				3B0E149127CFB6E9007A05B8 /* ProductModel.swift in Sources */,
 				3B0E143627CF4D7B007A05B8 /* ApplicationMacros.swift in Sources */,
 				3B0E145927CF5DA9007A05B8 /* SignUpViewModel.swift in Sources */,
 				3B0E13B027CF4048007A05B8 /* UIColor_EXT.swift in Sources */,
 				3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */,
+				3B0E149327CFB7C7007A05B8 /* API.Product.swift in Sources */,
 				3B0E146427CF6091007A05B8 /* UserModel.swift in Sources */,
 				3B0E147827CF6CFF007A05B8 /* SkeletonTableViewCell.swift in Sources */,
 				3B0E147927CF6CFF007A05B8 /* SkeletonHeaderFooterSection.swift in Sources */,

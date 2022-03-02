@@ -21,6 +21,8 @@ struct API {
     
     struct Authen { }
     
+    struct Product { }
+    
     
     static var cancellables = Set<AnyCancellable>()
 }

@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 final class ProductCellViewModel {
-    var product: UserModel
+    var product: ProductModel
     
-    init(product: UserModel) {
+    init(product: ProductModel) {
         self.product = product
     }
 }
