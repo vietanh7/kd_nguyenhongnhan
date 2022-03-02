@@ -444,8 +444,10 @@ extension ProductsViewController: ProductTableViewCellDelegate {
     }
     
     func onDeleteButtonTapped(dataModel: ProductModel, index: Int) {
-//        viewModel.action.send(.onUpdateFavorite(dataModel: dataModel, atIndex: index))
+    
         print("onDeleteButtonTapped")
+
+        viewModel.action.send(.onDelete(dataModel: dataModel, atIndex: index))
 
     }
 }

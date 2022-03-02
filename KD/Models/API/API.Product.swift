@@ -14,11 +14,14 @@ extension API.Product {
     enum EndPoint {
         
         case listProduct
+        case delete
         
         var urlString: String {
             switch self {
             case .listProduct:
                 return API.Config.endPointURL + "items"
+            case .delete:
+                return API.Config.endPointURL + "item/delete"
             }
         }
         
@@ -31,10 +34,8 @@ extension API.Product {
             "Content-Type": "application/json",
             "cache-control": "no-cache"
         ]
-        if UserDefaultsHelper.isLoggedIn() {
-            if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
-                headers["Authorization"] = "Bearer " + token
-            }
+        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+            headers["Authorization"] = "Bearer " + token
         }
         
         guard let url = URL(string: API.Product.EndPoint.listProduct.urlString) else {
@@ -45,6 +46,32 @@ extension API.Product {
                                  timeoutInterval: 10.0)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
+
+        let session = URLSession.shared
+        return session.dataTaskPublisher(for: request)
+    }
+    
+    static func postDelete(infoDelete: DeleteInfo) throws -> URLSession.DataTaskPublisher {
+        var headers = [
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+        ]
+        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+            headers["Authorization"] = "Bearer " + token
+        }
+        let encoder = JSONEncoder()
+        guard let postData = try? encoder.encode(infoDelete) else {
+            throw APIError.invalidResponse
+        }
+        guard let url = URL(string: API.Product.EndPoint.delete.urlString) else {
+            throw APIError.invalidURL
+        }
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData as Data
 
         let session = URLSession.shared
         return session.dataTaskPublisher(for: request)

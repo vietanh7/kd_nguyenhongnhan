@@ -25,6 +25,7 @@ final class ProductsViewModel {
         case didRefreshDataSuccess
         case didLoadMoreDataSuccess
         case didUpdateDataSuccess(dataModel: ProductModel, atIndex: Int)
+        case didDeleteSuccess
         
     }
     
@@ -33,7 +34,7 @@ final class ProductsViewModel {
         case onAppear
         case onRefreshData
         case onLoadMoreData
-        case onUpdateFavorite(dataModel: ProductModel, atIndex: Int)
+        case onDelete(dataModel: ProductModel, atIndex: Int)
         case onLogout
     }
     
@@ -85,9 +86,9 @@ final class ProductsViewModel {
             print("ViewModel -> View")
             //self.onLoadMoreData()
             
-        case .onUpdateFavorite(let dataModel, let index):
+        case .onDelete(let dataModel, let index):
             print("ViewModel -> View")
-            self.onUpdateFavorite(dataModel: dataModel, atIndex: index)
+            self.onDelete(dataModel: dataModel, atIndex: index)
             
         case .onLogout:
             self.onLogout()
@@ -112,6 +113,8 @@ final class ProductsViewModel {
             
         case .didUpdateDataSuccess(dataModel: _, atIndex: _):
             print("ViewModel -> State: didUpdateDataSuccess")
+        case .didDeleteSuccess:
+            print("didDeleteSuccess")
         }
     }
     
@@ -140,13 +143,39 @@ final class ProductsViewModel {
     }
     
     
-    private func onUpdateFavorite(dataModel: ProductModel, atIndex: Int) {
-//        DispatchQueue.global().asyncAfter(deadline: .now()+0.15) { [weak self] in
-//            guard let self = self else { return }
-//            dataModel.isFavorite = !(dataModel.isFavorite ?? false)
-//
-//            self.state.send(.didUpdateDataSuccess(dataModel: dataModel, atIndex: atIndex))
-//        }
+    private func onDelete(dataModel: ProductModel, atIndex: Int) {
+        dataCancellable = []
+
+        let deleteInfo = DeleteInfo(sku: dataModel.sku)
+
+        let postPublisher = try? API.Product.postDelete(infoDelete: deleteInfo)
+
+        _ = postPublisher?
+            .sink(receiveCompletion: { (completion) in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                print("DONE - postPublisher")
+            }
+        }, receiveValue: { (data, response) in
+            if let string = String(data: data, encoding: .utf8) {
+                print(string)
+                do {
+                    let decoder = JSONDecoder()
+                    _ = try decoder.decode(ProductModel.self, from: data)
+                    
+                    self.state.send(.didDeleteSuccess)
+                    
+                    // Remove data & reload layout
+                    self.listModels.remove(at: atIndex)
+                } catch {
+                    self.state.send(.error(message: "Item not exists!"))
+                }
+            }
+        })
+            .store(in: &dataCancellable)
+
     }
     
     
@@ -190,6 +219,7 @@ final class ProductsViewModel {
         })
             .store(in: &dataCancellable)
     }
+    
     
 }
 

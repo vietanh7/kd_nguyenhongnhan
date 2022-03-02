@@ -60,6 +60,8 @@
 		3B0E148F27CFAE8F007A05B8 /* RegisterResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */; };
 		3B0E149127CFB6E9007A05B8 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149027CFB6E9007A05B8 /* ProductModel.swift */; };
 		3B0E149327CFB7C7007A05B8 /* API.Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149227CFB7C7007A05B8 /* API.Product.swift */; };
+		3B0E149527CFC725007A05B8 /* DeleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149427CFC725007A05B8 /* DeleteInfo.swift */; };
+		3B0E149727CFC911007A05B8 /* DeleteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149627CFC911007A05B8 /* DeleteResponseModel.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -144,6 +146,8 @@
 		3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponseModel.swift; sourceTree = "<group>"; };
 		3B0E149027CFB6E9007A05B8 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		3B0E149227CFB7C7007A05B8 /* API.Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.Product.swift; sourceTree = "<group>"; };
+		3B0E149427CFC725007A05B8 /* DeleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteInfo.swift; sourceTree = "<group>"; };
+		3B0E149627CFC911007A05B8 /* DeleteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteResponseModel.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -335,9 +339,11 @@
 				3B0E145D27CF6091007A05B8 /* UserModel.swift */,
 				3B0E148627CFAC5B007A05B8 /* LoginInfo.swift */,
 				3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */,
+				3B0E149427CFC725007A05B8 /* DeleteInfo.swift */,
+				3B0E149027CFB6E9007A05B8 /* ProductModel.swift */,
 				3B0E148C27CFAE75007A05B8 /* LoginResponseModel.swift */,
 				3B0E148E27CFAE8F007A05B8 /* RegisterResponseModel.swift */,
-				3B0E149027CFB6E9007A05B8 /* ProductModel.swift */,
+				3B0E149627CFC911007A05B8 /* DeleteResponseModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -703,11 +709,13 @@
 				3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */,
 				3B0E13AC27CF4047007A05B8 /* UIFont_EXT.swift in Sources */,
 				3B0E13AB27CF4047007A05B8 /* UIImageView_EXT.swift in Sources */,
+				3B0E149727CFC911007A05B8 /* DeleteResponseModel.swift in Sources */,
 				3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */,
 				3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */,
 				3B0E148927CFAC71007A05B8 /* RegisterInfo.swift in Sources */,
 				3B0E139827CF3DF9007A05B8 /* ProductsViewController.swift in Sources */,
 				3B0E13AA27CF4047007A05B8 /* UITextField.Publisher.swift in Sources */,
+				3B0E149527CFC725007A05B8 /* DeleteInfo.swift in Sources */,
 				3B0E144E27CF54ED007A05B8 /* ValidationService.swift in Sources */,
 				3B0E13AE27CF4047007A05B8 /* UIView_EXT.swift in Sources */,
 				3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */,
