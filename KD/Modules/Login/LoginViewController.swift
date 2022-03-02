@@ -177,23 +177,12 @@ class LoginViewController: BaseViewController {
                 case .error(let message):
                     self?.showAlert(imageName: nil, title: "Alert", message: message, positiveTitleButton: nil, positiveCompletion: nil)
                     
-                case .gotoHome:
-                    DispatchQueue.main.async {
-                        self?.gotoHome()
-                    }
-                case .forgotPassword:
-                    DispatchQueue.main.async {
-                        self?.gotoForgotPassword()
-                    }
-                case .didGetResultConfirmSignInWithSMSMFACode:
-                    DispatchQueue.main.async {
-                        self?.gotoConfirmCodeToConfirmSignIn()
-                    }
-                    
-                case .didGetResultConfirmSignUp:
-                    DispatchQueue.main.async {
-                        self?.gotoConfirmCodeToConfirmSignUp()
-                    }
+                case .loginSuccess:
+                    self?.showAlert(title: "Alert", message: "Login success", positiveTitleButton: nil, positiveCompletion: { [weak self] in
+                        DispatchQueue.main.async {
+                            self?.navigationController?.popViewController(animated: true)
+                        }
+                    })
                     
                 default:
                     break
@@ -211,34 +200,8 @@ class LoginViewController: BaseViewController {
         viewModel.action.send(.login)
     }
     
-    @objc private func forgotPasswordButtonTapped(sender: UIButton) {
-        viewModel.action.send(.gotoForgotPassword)
-    }
-    
     // MARK: - Helper functions
-    private func gotoForgotPassword() {
-//        let viewController = ResetPasswordViewController()
-//        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    private func gotoHome() {
-//        let viewController = HomeViewController()
-//        _NavController.setViewControllers([viewController], animated: true)
-    }
-    
-    // Prompt the user to enter the SMSMFA code they received
-    // Then invoke `confirmSignIn` api with the code
-    private func gotoConfirmCodeToConfirmSignIn() {
-//        let viewController = ConfirmCodeViewController(username: viewModel.username ?? "", password: viewModel.password ?? "", useCase: .ConfirmSignIn)
-//        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    // Prompt the user to enter the SMSMFA code they received
-    // Then invoke `confirmSignIn` api with the code
-    private func gotoConfirmCodeToConfirmSignUp() {
-//        let viewController = ConfirmCodeViewController(username: viewModel.username ?? "", password: viewModel.password ?? "", useCase: .ConfirmSignUp)
-//        self.navigationController?.pushViewController(viewController, animated: true)
-    }
+   
 }
 
 //MARK: - UITextFieldDelegate
@@ -270,9 +233,9 @@ extension LoginViewController: UITextFieldDelegate {
         if textField == usernameTextField {
             let phoneString = textField.text?.trim()
             switch phoneString {
-            case "00":
-                let username = "+84386426986"
-                let password = "abc1234D"
+            case "11":
+                let username = "test0203@gmail.com"
+                let password = "1q2w"
 
                 textField.text = username
                 passwordTextField.text = password

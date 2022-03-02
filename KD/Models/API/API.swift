@@ -13,6 +13,7 @@ struct API {
     //MARK: - Config
     struct Config {
         static let baseURL = "https://jsonplaceholder.typicode.com/"
+        static let endPointURL = "https://hoodwink.medkomtek.net/api/"
     }
     
     //MARK: - Business API
@@ -26,6 +27,7 @@ struct API {
 enum APIError: Error {
     case error(String)
     case errorURL
+    case invalidBody
     case invalidResponse
     case errorParsing
     case invalidURL
@@ -38,6 +40,8 @@ extension APIError: LocalizedError {
             return NSLocalizedString(string, comment: "Error")
         case .errorURL:
             return NSLocalizedString("URL string is error.", comment: "Error URL")
+        case .invalidBody:
+            return NSLocalizedString("Invalid body", comment: "Invalid body")
         case .invalidResponse:
             return NSLocalizedString("Invalid response", comment: "Invalid response")
         case .errorParsing:

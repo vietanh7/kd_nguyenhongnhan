@@ -22,17 +22,13 @@ final class LoginViewModel {
     enum State {
         case initial
         case error(message: String)
-        case gotoHome
-        case forgotPassword
-        case didGetResultConfirmSignInWithSMSMFACode
-        case didGetResultConfirmSignUp
+        case loginSuccess
     }
     
     // Action
     enum Action {
         case clear
         case login
-        case gotoForgotPassword
     }
     
     // Actions
@@ -43,7 +39,7 @@ final class LoginViewModel {
     
     // Subscriptions
     var subscriptions = [AnyCancellable]()
-    
+    var dataCancellable = [AnyCancellable]()
     
     init(username: String, password: String) {
                 
@@ -88,10 +84,6 @@ final class LoginViewModel {
                     self.signIn()
                 }
                 .store(in: &subscriptions)
-
-        
-        case .gotoForgotPassword:
-            state.send(.forgotPassword)
             
         }
     }
@@ -106,19 +98,9 @@ final class LoginViewModel {
             
         case .error(let message):
             print("Error: \(message)")
-                        
-        case .gotoHome:
-            print("LOGINED")
             
-        case .forgotPassword:
-            print("Forgot password")
-            
-        case .didGetResultConfirmSignInWithSMSMFACode:
-            print("didGetResultConfirmSignInWithSMSMFACode")
-            
-        case .didGetResultConfirmSignUp:
-            print("didGetResultConfirmSignUp")
-            
+        case .loginSuccess:
+            print("loginSuccess")
         }
     }
     // MARK: - Availables
@@ -132,14 +114,6 @@ final class LoginViewModel {
                     ValidationService.availableDataInput(username ?? "") { available in
                         promise(.success(available ? username : nil))
                     }
-                    
-                    // way 2:
-//                    if let uname = username, uname.count>0 {
-//                        promise(.success(username))
-//                    } else {
-//                        promise(.success(nil))
-//                    }
-                    
                 }
             }
             .eraseToAnyPublisher()
@@ -226,13 +200,76 @@ final class LoginViewModel {
     
     
     //MARK: - Call Api
+    
     private func signIn() {
-        // TODO: - call api login
-        DLog("call api login")
+        dataCancellable = []
         DLog("username", username)
         DLog("password", password)
+
+        let loginInfo = LoginInfo(email: username ?? "", password: password ?? "")
+
+        let postUserPublisher = try? postUserLogin(user: loginInfo)
+
+        _ = postUserPublisher?
+            .sink(receiveCompletion: { (completion) in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                print("DONE - postUserPublisher")
+            }
+        }, receiveValue: { (data, response) in
+            if let string = String(data: data, encoding: .utf8) {
+                print(string)
+                do {
+                    let decoder = JSONDecoder()
+                    let responeModel = try decoder.decode(ResponseModel.self, from: data)
+                    print("token", responeModel.token ?? "")
+                    if let token = responeModel.token {
+                        self.state.send(.loginSuccess)
+                        UserDefaultsHelper.setData(value: token, key: .token)
+                    } else {
+                        if let error = responeModel.error {
+                            self.state.send(.error(message: error))
+                        }
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        })
+            .store(in: &dataCancellable)
+        
+
     }
     
+    // With Combine we return a DataTaskPublisher instead of using the completion handler of the DataTask
+    func postUserLogin(user: LoginInfo) throws -> URLSession.DataTaskPublisher {
+        let headers = [
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+        ]
+        let encoder = JSONEncoder()
+        guard let postData = try? encoder.encode(user) else {
+            throw APIError.invalidResponse
+        }
+        guard let url = URL(string: API.Config.endPointURL+"auth/login") else {
+            throw APIError.invalidURL
+        }
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData as Data
+
+        let session = URLSession.shared
+        return session.dataTaskPublisher(for: request)
+    }
     
-    
+}
+
+struct LoginInfo: Codable {
+    let email: String
+    let password: String
 }

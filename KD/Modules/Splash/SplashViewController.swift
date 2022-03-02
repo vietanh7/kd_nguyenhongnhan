@@ -13,7 +13,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
         
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
         
     }
     
@@ -23,7 +23,7 @@ class SplashViewController: UIViewController {
         _NavController.setNavigationBarHidden(true, animated: true)
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
             self.gotoProducts()
         }
         
