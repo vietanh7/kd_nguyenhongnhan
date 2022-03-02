@@ -11,9 +11,6 @@ import SkeletonView
 import Combine
 
 class ProductsViewController: BaseViewController {
-
-    //let scrollView = UIScrollView()
-    let contentView = UIView()
     
     private var headerView: UIView = {
         let view = UIView()
@@ -60,6 +57,17 @@ class ProductsViewController: BaseViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         button.setTitle("Login", for: .normal)
         button.addTarget(self, action: #selector(gotoLoginButtonTapped(sender:)), for: .touchUpInside)
+        button.layer.cornerRadius = 10.0
+        return button
+    }()
+    
+    let gotoLogoutButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemPurple
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        button.setTitle("Logout", for: .normal)
+        button.addTarget(self, action: #selector(gotoLogoutButtonTapped(sender:)), for: .touchUpInside)
         button.layer.cornerRadius = 10.0
         return button
     }()
@@ -157,16 +165,21 @@ class ProductsViewController: BaseViewController {
 
         hStackButtons.addArrangedSubview(gotoSignUpButton)
         gotoSignUpButton.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
             make.top.bottom.equalTo(0)
         }
+        //gotoLoginButton.isHidden = true
 
         hStackButtons.addArrangedSubview(gotoLoginButton)
         gotoLoginButton.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
             make.top.bottom.equalTo(0)
         }
+        //gotoLoginButton.isHidden = true
         
+        hStackButtons.addArrangedSubview(gotoLogoutButton)
+        gotoLogoutButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(0)
+        }
+        gotoLogoutButton.isHidden = false
         
         setupTableView()
     }
@@ -285,15 +298,21 @@ class ProductsViewController: BaseViewController {
       
     }
     
-    // MARK: - Actions
     @objc private func gotoLoginButtonTapped(sender: UIButton) {
         let viewController = LoginViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
       
     }
     
-
+    @objc private func gotoLogoutButtonTapped(sender: UIButton) {
+        
+        // TODO: - Handle logout
+        DLog("Handle logout")
+    }
+    
 }
+
+
 extension ProductsViewController {
     func didRefreshDataSuccess() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2 , execute: {
@@ -338,15 +357,13 @@ extension ProductsViewController: ProductTableViewCellDelegate {
 //        let viewController = PostsTableViewController(userId: dataModel.id)
         
 //        self.navigationController?.pushViewController(viewController, animated: true)
+        print("onSelectButtonTapped")
     }
     
-    func onUpdateFavoriteButtonTapped(dataModel: UserModel, index: Int) {
-        //viewModel.onUpdateFavorite(dataModel: dataModel, atIndex: index)
-        viewModel.action.send(.onUpdateFavorite(dataModel: dataModel, atIndex: index))
-    }
-    
-    func onAvatarImageViewTapped(dataModel: UserModel, index: Int) {
-        print("onAvatarImageViewTapped")
+    func onDeleteButtonTapped(dataModel: UserModel, index: Int) {
+//        viewModel.action.send(.onUpdateFavorite(dataModel: dataModel, atIndex: index))
+        print("onDeleteButtonTapped")
+
     }
 }
 
@@ -394,15 +411,6 @@ extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableView
 
     func collectionSkeletonView(_ skeletonView: UITableView, prepareCellForSkeleton cell: UITableViewCell, at indexPath: IndexPath) {
     }
-
-    // MARK: - Header section
-    
-//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 50
-//    }
     
     func collectionSkeletonView(_ skeletonView: UITableView, identifierForHeaderInSection section: Int) -> ReusableHeaderFooterIdentifier? {
         if viewModel.dataLoaded {
@@ -411,19 +419,6 @@ extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableView
             return "SkeletonHeaderFooterSection"
         }
     }
-
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if viewModel.dataLoaded {
-//            let header = tableView
-//                .dequeueReusableHeaderFooterView(withIdentifier: "HeaderIdentifier") as! HeaderFooterSection
-//            header.titleLabel.text = "header -> \(section)"
-//            return header
-//        } else {
-//            let header = tableView
-//                .dequeueReusableHeaderFooterView(withIdentifier: "SkeletonHeaderFooterSection") as! SkeletonHeaderFooterSection
-//            return header
-//        }
-//    }
 
     // MARK: - Footer section
     // not work because using loadmore footer
@@ -435,16 +430,6 @@ extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableView
         }
     }
 
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        if viewModel.dataLoaded {
-//            let footer = tableView
-//                .dequeueReusableHeaderFooterView(withIdentifier: "FooterIdentifier") as! HeaderFooterSection
-//            footer.titleLabel.text = "footer -> \(section)"
-//            return footer
-//        } else {
-//            return nil
-//        }
-//    }
 }
 
 ////MARK: - DetailViewModelOutput

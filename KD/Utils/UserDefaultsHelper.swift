@@ -20,11 +20,7 @@
 import Foundation
 
 enum UserDefaultKeys: String, CaseIterable {
-    case authVerificationID
-    case userId
-    case phoneNumber
-    case email
-    case refreshToken
+    case token
 }
 
 final class UserDefaultsHelper {
@@ -45,7 +41,7 @@ final class UserDefaultsHelper {
     }
     
     static func isLoggedIn() -> Bool {
-        return (self.getData(type: String.self, forKey: .userId) != nil)
+        return (self.getData(type: String.self, forKey: .token) != nil)
     }
     
     static func signOut() {

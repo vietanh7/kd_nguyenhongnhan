@@ -8,18 +8,9 @@
 import Foundation
 import Combine
 
-//protocol BasicTableViewViewModelOutput: BaseViewModelOutput {
-//    func didRefreshDataSuccess()
-//    func didLoadMoreDataSuccess()
-//    func didUpdateDataSuccess(dataModel: UserModel, atIndex: Int)
-//}
-
 private let Limit = 5
 
-
-
 final class ProductsViewModel {
-    //    weak var delegate: BasicTableViewViewModelOutput?
     
     //MARK: - Define
     enum FetchDataType {
@@ -173,13 +164,11 @@ final class ProductsViewModel {
                 self.dataLoaded = true
                 if fetchDataType == .refreshData {
                     self.listModels = results
-                    //self.delegate?.didRefreshDataSuccess()
                     
                     self.state.send(.didRefreshDataSuccess)
                 } else {
                     self.listModels.append(contentsOf: results)
                     
-                    //self.delegate?.didLoadMoreDataSuccess()
                     self.state.send(.didLoadMoreDataSuccess)
                 }
                 
