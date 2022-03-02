@@ -26,6 +26,14 @@
 		3B0E13B727CF4170007A05B8 /* ExampleNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13B527CF4170007A05B8 /* ExampleNavigationViewController.swift */; };
 		3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */; };
 		3B0E143627CF4D7B007A05B8 /* ApplicationMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E143527CF4D7B007A05B8 /* ApplicationMacros.swift */; };
+		3B0E144227CF5421007A05B8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144027CF5421007A05B8 /* LoginViewModel.swift */; };
+		3B0E144327CF5421007A05B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144127CF5421007A05B8 /* LoginViewController.swift */; };
+		3B0E144B27CF54ED007A05B8 /* LoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144527CF54ED007A05B8 /* LoggerHelper.swift */; };
+		3B0E144C27CF54ED007A05B8 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144627CF54ED007A05B8 /* UserDefaultsHelper.swift */; };
+		3B0E144E27CF54ED007A05B8 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144827CF54ED007A05B8 /* ValidationService.swift */; };
+		3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144927CF54ED007A05B8 /* NetworkManager.swift */; };
+		3B0E145027CF54ED007A05B8 /* ConfigurationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */; };
+		3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145327CF572D007A05B8 /* PasswordTextField.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -76,6 +84,14 @@
 		3B0E13B527CF4170007A05B8 /* ExampleNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleNavigationViewController.swift; sourceTree = "<group>"; };
 		3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAlertViewController.swift; sourceTree = "<group>"; };
 		3B0E143527CF4D7B007A05B8 /* ApplicationMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationMacros.swift; sourceTree = "<group>"; };
+		3B0E144027CF5421007A05B8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		3B0E144127CF5421007A05B8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3B0E144527CF54ED007A05B8 /* LoggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerHelper.swift; sourceTree = "<group>"; };
+		3B0E144627CF54ED007A05B8 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		3B0E144827CF54ED007A05B8 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		3B0E144927CF54ED007A05B8 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationHelper.swift; sourceTree = "<group>"; };
+		3B0E145327CF572D007A05B8 /* PasswordTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +180,7 @@
 		3B0E13B127CF415A007A05B8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				3B0E145327CF572D007A05B8 /* PasswordTextField.swift */,
 				3B0E13B227CF415A007A05B8 /* VW_LoadingAnimation.swift */,
 			);
 			path = SubViews;
@@ -193,6 +210,7 @@
 				3B0E139927CF3FC3007A05B8 /* BaseViewController */,
 				3B0E143D27CF4FFD007A05B8 /* Splash */,
 				3B0E143E27CF5004007A05B8 /* Products */,
+				3B0E143F27CF5421007A05B8 /* Login */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -211,6 +229,27 @@
 				3B0E139727CF3DF9007A05B8 /* ProductsViewController.swift */,
 			);
 			path = Products;
+			sourceTree = "<group>";
+		};
+		3B0E143F27CF5421007A05B8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3B0E144027CF5421007A05B8 /* LoginViewModel.swift */,
+				3B0E144127CF5421007A05B8 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3B0E144427CF54ED007A05B8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3B0E144527CF54ED007A05B8 /* LoggerHelper.swift */,
+				3B0E144627CF54ED007A05B8 /* UserDefaultsHelper.swift */,
+				3B0E144827CF54ED007A05B8 /* ValidationService.swift */,
+				3B0E144927CF54ED007A05B8 /* NetworkManager.swift */,
+				3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3BFFC88127CF030A0065C6BA = {
@@ -244,6 +283,7 @@
 				3B0E13B427CF4170007A05B8 /* BasicAlert */,
 				3B0E13B127CF415A007A05B8 /* SubViews */,
 				3B0E13A027CF4047007A05B8 /* Extensions */,
+				3B0E144427CF54ED007A05B8 /* Utils */,
 				3B0E143C27CF4FF5007A05B8 /* Modules */,
 				3BFFC89627CF030E0065C6BA /* Assets.xcassets */,
 				3BFFC89827CF030E0065C6BA /* LaunchScreen.storyboard */,
@@ -518,23 +558,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B0E145027CF54ED007A05B8 /* ConfigurationHelper.swift in Sources */,
+				3B0E144327CF5421007A05B8 /* LoginViewController.swift in Sources */,
 				3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */,
 				3B0E13AC27CF4047007A05B8 /* UIFont_EXT.swift in Sources */,
 				3B0E13AB27CF4047007A05B8 /* UIImageView_EXT.swift in Sources */,
 				3B0E139827CF3DF9007A05B8 /* ProductsViewController.swift in Sources */,
 				3B0E13AA27CF4047007A05B8 /* UITextField.Publisher.swift in Sources */,
+				3B0E144E27CF54ED007A05B8 /* ValidationService.swift in Sources */,
 				3B0E13AE27CF4047007A05B8 /* UIView_EXT.swift in Sources */,
 				3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */,
 				3B0E138227CF38C5007A05B8 /* AppNavigationController.swift in Sources */,
+				3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */,
+				3B0E144227CF5421007A05B8 /* LoginViewModel.swift in Sources */,
+				3B0E144C27CF54ED007A05B8 /* UserDefaultsHelper.swift in Sources */,
 				3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */,
 				3B0E143627CF4D7B007A05B8 /* ApplicationMacros.swift in Sources */,
 				3B0E13B027CF4048007A05B8 /* UIColor_EXT.swift in Sources */,
+				3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */,
 				3B0E139E27CF3FC3007A05B8 /* BaseViewModel.swift in Sources */,
 				3B0E13A927CF4047007A05B8 /* Date_EXT.swift in Sources */,
 				3B0E139D27CF3FC3007A05B8 /* BaseViewController.swift in Sources */,
 				3B0E13AF27CF4047007A05B8 /* String_EXT.swift in Sources */,
 				3B0E13B727CF4170007A05B8 /* ExampleNavigationViewController.swift in Sources */,
 				3B0E139627CF3CB0007A05B8 /* SplashViewController.swift in Sources */,
+				3B0E144B27CF54ED007A05B8 /* LoggerHelper.swift in Sources */,
 				3B0E13B327CF415A007A05B8 /* VW_LoadingAnimation.swift in Sources */,
 				3B0E13AD27CF4047007A05B8 /* UIViewController_EXT.swift in Sources */,
 			);

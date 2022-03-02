@@ -19,6 +19,7 @@ target 'KD' do
   pod 'SwiftEntryKit', '2.0.0'
   pod 'KRProgressHUD'
   pod 'SDWebImage',               '5.7.3'
+  pod 'ReachabilitySwift'
 
   target 'KDTests' do
     inherit! :search_paths

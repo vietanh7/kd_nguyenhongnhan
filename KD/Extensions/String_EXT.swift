@@ -30,10 +30,8 @@ extension String {
         return NSPredicate(format: "SELF MATCHES %@", emailRegEx).evaluate(with: self)
     }
     
-    //"Your password must be between 8 to 16 characters, include uppercase letter, lowercase letter and number."
-    //Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet and 1 Number:
     var isValidPassword: Bool {
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,16}$")
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "(?=.*[0-9a-zA-Z]).{4,}")
         return passwordRegex.evaluate(with: self)
     }
     
