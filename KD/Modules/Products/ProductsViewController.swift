@@ -119,7 +119,7 @@ class ProductsViewController: BaseViewController {
     
     // MARK: - Actions
     @objc private func gotoSignUpButtonTapped(sender: UIButton) {
-        let viewController = LoginViewController()
+        let viewController = SignUpViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
       
     }

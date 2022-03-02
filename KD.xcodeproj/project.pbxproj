@@ -34,6 +34,8 @@
 		3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144927CF54ED007A05B8 /* NetworkManager.swift */; };
 		3B0E145027CF54ED007A05B8 /* ConfigurationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */; };
 		3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145327CF572D007A05B8 /* PasswordTextField.swift */; };
+		3B0E145827CF5DA9007A05B8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */; };
+		3B0E145927CF5DA9007A05B8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -92,6 +94,8 @@
 		3B0E144927CF54ED007A05B8 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationHelper.swift; sourceTree = "<group>"; };
 		3B0E145327CF572D007A05B8 /* PasswordTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				3B0E139927CF3FC3007A05B8 /* BaseViewController */,
 				3B0E143D27CF4FFD007A05B8 /* Splash */,
 				3B0E143E27CF5004007A05B8 /* Products */,
+				3B0E145527CF5DA9007A05B8 /* SignUp */,
 				3B0E143F27CF5421007A05B8 /* Login */,
 			);
 			path = Modules;
@@ -250,6 +255,15 @@
 				3B0E144A27CF54ED007A05B8 /* ConfigurationHelper.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		3B0E145527CF5DA9007A05B8 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */,
+				3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		3BFFC88127CF030A0065C6BA = {
@@ -574,12 +588,14 @@
 				3B0E144C27CF54ED007A05B8 /* UserDefaultsHelper.swift in Sources */,
 				3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */,
 				3B0E143627CF4D7B007A05B8 /* ApplicationMacros.swift in Sources */,
+				3B0E145927CF5DA9007A05B8 /* SignUpViewModel.swift in Sources */,
 				3B0E13B027CF4048007A05B8 /* UIColor_EXT.swift in Sources */,
 				3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */,
 				3B0E139E27CF3FC3007A05B8 /* BaseViewModel.swift in Sources */,
 				3B0E13A927CF4047007A05B8 /* Date_EXT.swift in Sources */,
 				3B0E139D27CF3FC3007A05B8 /* BaseViewController.swift in Sources */,
 				3B0E13AF27CF4047007A05B8 /* String_EXT.swift in Sources */,
+				3B0E145827CF5DA9007A05B8 /* SignUpViewController.swift in Sources */,
 				3B0E13B727CF4170007A05B8 /* ExampleNavigationViewController.swift in Sources */,
 				3B0E139627CF3CB0007A05B8 /* SplashViewController.swift in Sources */,
 				3B0E144B27CF54ED007A05B8 /* LoggerHelper.swift in Sources */,

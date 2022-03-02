@@ -227,7 +227,10 @@ final class LoginViewModel {
     
     //MARK: - Call Api
     private func signIn() {
-        DLog("call signIn api")
+        // TODO: - call api login
+        DLog("call api login")
+        DLog("username", username)
+        DLog("password", password)
     }
     
     
