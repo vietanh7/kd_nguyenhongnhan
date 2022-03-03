@@ -25,6 +25,17 @@ struct API {
     
     
     static var cancellables = Set<AnyCancellable>()
+    
+    static func headerRequest()->[String:String] {
+        var headers = [
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+        ]
+        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
+            headers["Authorization"] = "Bearer " + token
+        }
+        return headers
+    }
 }
 
 enum APIError: Error {

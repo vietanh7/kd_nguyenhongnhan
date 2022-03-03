@@ -115,13 +115,7 @@ extension API.Product {
     
     
     static func postUpdateProduct(productInfo: AddProductInfo) throws -> URLSession.DataTaskPublisher {
-        var headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-        ]
-        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
-            headers["Authorization"] = "Bearer " + token
-        }
+
         let encoder = JSONEncoder()
         guard let postData = try? encoder.encode(productInfo) else {
             throw APIError.invalidResponse
@@ -133,7 +127,7 @@ extension API.Product {
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = API.headerRequest()
         request.httpBody = postData as Data
 
         let session = URLSession.shared
@@ -141,13 +135,7 @@ extension API.Product {
     }
     
     static func postSearchProduct(searchInfo: SearchInfo) throws -> URLSession.DataTaskPublisher {
-        var headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-        ]
-        if let token = UserDefaultsHelper.getData(type: String.self, forKey: .token) {
-            headers["Authorization"] = "Bearer " + token
-        }
+        
         let encoder = JSONEncoder()
         guard let postData = try? encoder.encode(searchInfo) else {
             throw APIError.invalidResponse
@@ -159,7 +147,7 @@ extension API.Product {
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = API.headerRequest()
         request.httpBody = postData as Data
 
         let session = URLSession.shared

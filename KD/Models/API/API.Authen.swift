@@ -29,10 +29,7 @@ extension API.Authen {
     
     // With Combine we return a DataTaskPublisher instead of using the completion handler of the DataTask
     static func postUserLogin(user: LoginInfo) throws -> URLSession.DataTaskPublisher {
-        let headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-        ]
+        
         let encoder = JSONEncoder()
         guard let postData = try? encoder.encode(user) else {
             throw APIError.invalidResponse
@@ -44,7 +41,7 @@ extension API.Authen {
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = API.headerRequest()
         request.httpBody = postData as Data
 
         let session = URLSession.shared
@@ -52,10 +49,7 @@ extension API.Authen {
     }
     
     static func postUserRegister(user: RegisterInfo) throws -> URLSession.DataTaskPublisher {
-        let headers = [
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-        ]
+        
         let encoder = JSONEncoder()
         guard let postData = try? encoder.encode(user) else {
             throw APIError.invalidResponse
@@ -67,7 +61,7 @@ extension API.Authen {
                                  cachePolicy: .useProtocolCachePolicy,
                                  timeoutInterval: 10.0)
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = API.headerRequest()
         request.httpBody = postData as Data
 
         let session = URLSession.shared
