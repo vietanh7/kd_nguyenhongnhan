@@ -30,7 +30,6 @@ class SplashViewController: UIViewController {
         self.edgesForExtendedLayout = []
         view.backgroundColor = .white
         
-        
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(100)
