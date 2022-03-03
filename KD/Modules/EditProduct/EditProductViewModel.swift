@@ -30,7 +30,6 @@ final class EditProductViewModel {
     
     // Action
     enum Action {
-        case clear
         case saveProduct
     }
     
@@ -67,9 +66,6 @@ final class EditProductViewModel {
     private func processAction(_ action: Action) {
         
         switch action {
-        case .clear:
-            self.clear()
-            
         case .saveProduct:
             print("ViewModel -> View")
             
@@ -142,11 +138,6 @@ final class EditProductViewModel {
     //MARK: - Private property
     private let dispathGroup = DispatchGroup()
     
-    private func clear() {
-        sku = ""
-        productName = ""
-    }
-    
     
     //MARK: - Call Api
     
@@ -172,6 +163,14 @@ final class EditProductViewModel {
                 do {
                     let decoder = JSONDecoder()
                     let productModel = try decoder.decode(ProductModel.self, from: data)
+                    
+                    self.productModel.sku = productModel.sku
+                    self.productModel.product_name = productModel.product_name
+                    self.productModel.qty = productModel.qty
+                    self.productModel.price = productModel.price
+                    self.productModel.unit = productModel.unit
+                    self.productModel.status = productModel.status
+                    
                     self.state.send(.saveSuccess)
                     
                 } catch {

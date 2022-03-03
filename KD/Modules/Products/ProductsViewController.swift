@@ -432,9 +432,9 @@ extension ProductsViewController {
 extension ProductsViewController: ProductTableViewCellDelegate {
     
     func onSelectButtonTapped(dataModel: ProductModel, index: Int) {
-        print("onSelectButtonTapped")
         
         let viewController = EditProductViewController(dataModel: dataModel)
+        viewController.delegate = self
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -509,21 +509,20 @@ extension ProductsViewController: SkeletonTableViewDataSource, SkeletonTableView
 }
 
 ////MARK: - DetailViewModelOutput
-//extension ProductsViewController: DetailViewControllerDelegate {
-//    func onUpdateFavoriteButtonTapped(dataModel: BasicModel) {
-//        print("onUpdateFavoriteButtonTapped")
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-//    }
-//
+extension ProductsViewController: EditProductViewControllerDelegate {
+    func onUpdateButtonTapped(dataModel: ProductModel) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
 //    func onDeleteButtonTapped(dataModel: BasicModel) {
 //        if let index = viewModel.listModels.firstIndex(where: {$0 === dataModel}) {
 //            viewModel.listModels.remove(at: index)
 //            //self.didDeleteCellAtIndex(index: index)
 //        }
 //    }
-//}
+}
 
 extension ProductsViewController: UITextFieldDelegate {
     

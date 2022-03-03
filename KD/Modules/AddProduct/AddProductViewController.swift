@@ -60,7 +60,6 @@ class AddProductViewController: BaseViewController {
         textField.borderStyle = .roundedRect
         textField.placeholder = "Unit"
         textField.keyboardType = .default
-        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -132,6 +131,13 @@ class AddProductViewController: BaseViewController {
         productNameTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
         productNameTextField.delegate = self
         
+        vStackContainer.addArrangedSubview(unitTextField)
+        unitTextField.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+        unitTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
+        unitTextField.delegate = self
+        
         vStackContainer.addArrangedSubview(qltTextField)
         qltTextField.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -145,13 +151,6 @@ class AddProductViewController: BaseViewController {
         }
         priceTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
         priceTextField.delegate = self
-        
-        vStackContainer.addArrangedSubview(unitTextField)
-        unitTextField.snp.makeConstraints { make in
-            make.height.equalTo(50)
-        }
-        unitTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
-        unitTextField.delegate = self
         
         //MARK: - Buttons
         vStackContainer.addArrangedSubview(addButton)

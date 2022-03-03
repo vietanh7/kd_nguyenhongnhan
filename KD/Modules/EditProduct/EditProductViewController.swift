@@ -9,7 +9,12 @@ import UIKit
 
 private let maxLengthUsername: Int = 50
 
+protocol EditProductViewControllerDelegate: AnyObject {
+    func onUpdateButtonTapped(dataModel: ProductModel)
+}
 class EditProductViewController: BaseViewController {
+    
+    weak var delegate: EditProductViewControllerDelegate?
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -30,6 +35,8 @@ class EditProductViewController: BaseViewController {
         textField.placeholder = "SKU"
         textField.keyboardType = .default
         textField.autocapitalizationType = .none
+        textField.isUserInteractionEnabled = false
+        textField.isEnabled = false
         return textField
     }()
     
@@ -60,7 +67,6 @@ class EditProductViewController: BaseViewController {
         textField.borderStyle = .roundedRect
         textField.placeholder = "Unit"
         textField.keyboardType = .default
-        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -102,10 +108,6 @@ class EditProductViewController: BaseViewController {
         
         title = "Edit product"
         
-        // Navigation Bar
-        let clearBarButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clear))
-        self.navigationItem.rightBarButtonItem = clearBarButton
-        
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(0)
@@ -139,6 +141,13 @@ class EditProductViewController: BaseViewController {
         productNameTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
         productNameTextField.delegate = self
         
+        vStackContainer.addArrangedSubview(unitTextField)
+        unitTextField.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+        unitTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
+        unitTextField.delegate = self
+        
         vStackContainer.addArrangedSubview(qltTextField)
         qltTextField.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -152,13 +161,6 @@ class EditProductViewController: BaseViewController {
         }
         priceTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
         priceTextField.delegate = self
-        
-        vStackContainer.addArrangedSubview(unitTextField)
-        unitTextField.snp.makeConstraints { make in
-            make.height.equalTo(50)
-        }
-        unitTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: UIControl.Event.editingChanged)
-        unitTextField.delegate = self
         
         //MARK: - Buttons
         vStackContainer.addArrangedSubview(saveButton)
@@ -261,6 +263,11 @@ class EditProductViewController: BaseViewController {
                     
                 case .saveSuccess:
                     self?.showAlert(title: "Alert", message: "Update product success", positiveTitleButton: nil, positiveCompletion: { [weak self] in
+                        
+                        if let productModel = self?.viewModel.productModel {
+                            self?.delegate?.onUpdateButtonTapped(dataModel: productModel)
+                        }
+                        
                         DispatchQueue.main.async {
                             self?.navigationController?.popViewController(animated: true)
                         }
@@ -274,9 +281,6 @@ class EditProductViewController: BaseViewController {
     }
         
     //MARK: - Actions
-    @objc func clear() {
-        viewModel.action.send(.clear)
-    }
     
     @objc private func saveButtonTapped(sender: UIButton) {
         viewModel.action.send(.saveProduct)
