@@ -1,5 +1,5 @@
 //
-//  AddProductViewModel.swift
+//  EditProductViewModel.swift
 //  KD
 //
 //  Created by Nguyen Hong Nhan on 02/03/2022.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class AddProductViewModel {
+final class EditProductViewModel {
     
     //MARK: - Properties
     // Publisher & store
@@ -25,13 +25,13 @@ final class AddProductViewModel {
     enum State {
         case initial
         case error(message: String)
-        case addSuccess
+        case saveSuccess
     }
     
     // Action
     enum Action {
         case clear
-        case addProduct
+        case saveProduct
     }
     
     // Actions
@@ -44,8 +44,11 @@ final class AddProductViewModel {
     var subscriptions = [AnyCancellable]()
     var dataCancellable = [AnyCancellable]()
     
-    init() {
+    var productModel: ProductModel
+    init(dataModel: ProductModel) {
                 
+        self.productModel = dataModel
+        
         // state
         state
             .sink { [weak self] state in
@@ -67,10 +70,10 @@ final class AddProductViewModel {
         case .clear:
             self.clear()
             
-        case .addProduct:
+        case .saveProduct:
             print("ViewModel -> View")
             
-            self.addProduct()
+            self.saveProduct()
             
         }
     }
@@ -80,16 +83,16 @@ final class AddProductViewModel {
         
         switch state {
         case .initial:
-            sku = ""
-            productName = ""
-            qlt = ""
-            price = ""
-            unit = ""
+            sku = productModel.sku
+            productName = productModel.product_name
+            qlt = "\(productModel.qty)"
+            price = "\(productModel.price)"
+            unit = productModel.unit
             
         case .error(let message):
             print("Error: \(message)")
             
-        case .addSuccess:
+        case .saveSuccess:
             print("addSuccess")
         }
     }
@@ -147,13 +150,13 @@ final class AddProductViewModel {
     
     //MARK: - Call Api
     
-    private func addProduct() {
+    private func saveProduct() {
         dataCancellable = []
         DLog("sku", sku)
 
         let addInfo = AddProductInfo(sku: sku ?? "", product_name: productName ?? "", qty: Int(qlt!) ?? 0, price: Double(price!) ?? 0, unit: unit ?? "1", status: 1)
 
-        let postPublisher = try? API.Product.postAddProduct(productInfo: addInfo)
+        let postPublisher = try? API.Product.postUpdateProduct(productInfo: addInfo)
 
         _ = postPublisher?
             .sink(receiveCompletion: { (completion) in
@@ -169,7 +172,7 @@ final class AddProductViewModel {
                 do {
                     let decoder = JSONDecoder()
                     let productModel = try decoder.decode(ProductModel.self, from: data)
-                    self.state.send(.addSuccess)
+                    self.state.send(.saveSuccess)
                     
                 } catch {
                     print(error)

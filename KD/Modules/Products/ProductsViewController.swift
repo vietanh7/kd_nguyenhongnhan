@@ -432,21 +432,14 @@ extension ProductsViewController {
 extension ProductsViewController: ProductTableViewCellDelegate {
     
     func onSelectButtonTapped(dataModel: ProductModel, index: Int) {
-        
-        // TODO: - Goto Detail Product
-//        // way 2:
-//        let viewController = PostsTableViewController(userId: dataModel.id)
-        
-//        self.navigationController?.pushViewController(viewController, animated: true)
         print("onSelectButtonTapped")
+        
+        let viewController = EditProductViewController(dataModel: dataModel)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func onDeleteButtonTapped(dataModel: ProductModel, index: Int) {
-    
-        print("onDeleteButtonTapped")
-
         viewModel.action.send(.onDelete(dataModel: dataModel, atIndex: index))
-
     }
 }
 

@@ -66,6 +66,8 @@
 		3B0E149C27CFCF3C007A05B8 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149B27CFCF3C007A05B8 /* AddProductViewModel.swift */; };
 		3B0E149E27CFD3A9007A05B8 /* AddProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149D27CFD3A9007A05B8 /* AddProductInfo.swift */; };
 		3B0E14A027CFD637007A05B8 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E149F27CFD637007A05B8 /* ErrorModel.swift */; };
+		3B0E14A327D04C17007A05B8 /* EditProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E14A127D04C16007A05B8 /* EditProductViewModel.swift */; };
+		3B0E14A427D04C17007A05B8 /* EditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E14A227D04C16007A05B8 /* EditProductViewController.swift */; };
 		3BFFC88E27CF030A0065C6BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */; };
 		3BFFC89227CF030A0065C6BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFC89127CF030A0065C6BA /* ViewController.swift */; };
 		3BFFC89727CF030E0065C6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BFFC89627CF030E0065C6BA /* Assets.xcassets */; };
@@ -156,6 +158,8 @@
 		3B0E149B27CFCF3C007A05B8 /* AddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewModel.swift; sourceTree = "<group>"; };
 		3B0E149D27CFD3A9007A05B8 /* AddProductInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductInfo.swift; sourceTree = "<group>"; };
 		3B0E149F27CFD637007A05B8 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		3B0E14A127D04C16007A05B8 /* EditProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewModel.swift; sourceTree = "<group>"; };
+		3B0E14A227D04C16007A05B8 /* EditProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewController.swift; sourceTree = "<group>"; };
 		3BFFC88A27CF030A0065C6BA /* KD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BFFC89127CF030A0065C6BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -274,9 +278,10 @@
 		3B0E143C27CF4FF5007A05B8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3B0E149827CFCEFD007A05B8 /* AddProduct */,
 				3B0E139927CF3FC3007A05B8 /* BaseViewController */,
 				3B0E143D27CF4FFD007A05B8 /* Splash */,
+				3B0E149827CFCEFD007A05B8 /* AddProduct */,
+				3B0E14A527D04C1C007A05B8 /* EditProduct */,
 				3B0E143E27CF5004007A05B8 /* Products */,
 				3B0E145527CF5DA9007A05B8 /* SignUp */,
 				3B0E143F27CF5421007A05B8 /* Login */,
@@ -407,6 +412,15 @@
 				3B0E149927CFCF2E007A05B8 /* AddProductViewController.swift */,
 			);
 			path = AddProduct;
+			sourceTree = "<group>";
+		};
+		3B0E14A527D04C1C007A05B8 /* EditProduct */ = {
+			isa = PBXGroup;
+			children = (
+				3B0E14A227D04C16007A05B8 /* EditProductViewController.swift */,
+				3B0E14A127D04C16007A05B8 /* EditProductViewModel.swift */,
+			);
+			path = EditProduct;
 			sourceTree = "<group>";
 		};
 		3BFFC88127CF030A0065C6BA = {
@@ -730,10 +744,12 @@
 				3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */,
 				3B0E13AC27CF4047007A05B8 /* UIFont_EXT.swift in Sources */,
 				3B0E13AB27CF4047007A05B8 /* UIImageView_EXT.swift in Sources */,
+				3B0E14A327D04C17007A05B8 /* EditProductViewModel.swift in Sources */,
 				3B0E149727CFC911007A05B8 /* DeleteResponseModel.swift in Sources */,
 				3B0E148327CF857B007A05B8 /* SearchBarTxt.swift in Sources */,
 				3B0E148127CF6DD7007A05B8 /* NoResultView.swift in Sources */,
 				3B0E148927CFAC71007A05B8 /* RegisterInfo.swift in Sources */,
+				3B0E14A427D04C17007A05B8 /* EditProductViewController.swift in Sources */,
 				3B0E139827CF3DF9007A05B8 /* ProductsViewController.swift in Sources */,
 				3B0E13AA27CF4047007A05B8 /* UITextField.Publisher.swift in Sources */,
 				3B0E149527CFC725007A05B8 /* DeleteInfo.swift in Sources */,

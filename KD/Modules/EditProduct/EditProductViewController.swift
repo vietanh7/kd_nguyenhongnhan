@@ -1,5 +1,5 @@
 //
-//  AddProductViewController.swift
+//  EditProductViewController.swift
 //  KD
 //
 //  Created by Nguyen Hong Nhan on 02/03/2022.
@@ -9,7 +9,7 @@ import UIKit
 
 private let maxLengthUsername: Int = 50
 
-class AddProductViewController: BaseViewController {
+class EditProductViewController: BaseViewController {
     
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -64,18 +64,25 @@ class AddProductViewController: BaseViewController {
         return textField
     }()
     
-    let addButton: UIButton = {
+    let saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemPurple
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        button.setTitle("Add", for: .normal)
-        button.addTarget(self, action: #selector(addButtonTapped(sender:)), for: .touchUpInside)
+        button.setTitle("Save", for: .normal)
+        button.addTarget(self, action: #selector(saveButtonTapped(sender:)), for: .touchUpInside)
         button.layer.cornerRadius = 10.0
         return button
     }()
     
-    var viewModel = AddProductViewModel()
+    var viewModel: EditProductViewModel
+    init(dataModel: ProductModel) {
+        viewModel = EditProductViewModel(dataModel: dataModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -93,7 +100,7 @@ class AddProductViewController: BaseViewController {
         self.edgesForExtendedLayout = []
         view.backgroundColor = .white
         
-        title = "Add product"
+        title = "Edit product"
         
         // Navigation Bar
         let clearBarButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clear))
@@ -154,8 +161,8 @@ class AddProductViewController: BaseViewController {
         unitTextField.delegate = self
         
         //MARK: - Buttons
-        vStackContainer.addArrangedSubview(addButton)
-        addButton.snp.makeConstraints { make in
+        vStackContainer.addArrangedSubview(saveButton)
+        saveButton.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
         
@@ -187,7 +194,7 @@ class AddProductViewController: BaseViewController {
         // enable & alpha button Login
         viewModel.triggerEnableButton
             .receive(on: RunLoop.main)
-            .assign(to: \.isEnabled, on: addButton)
+            .assign(to: \.isEnabled, on: saveButton)
             .store(in: &subscriptions)
 
         viewModel.triggerEnableButton
@@ -195,7 +202,7 @@ class AddProductViewController: BaseViewController {
                 return ($0 == true) ? 1.0 : 0.5
             }
             .receive(on: RunLoop.main)
-            .assign(to: \.alpha, on: addButton)
+            .assign(to: \.alpha, on: saveButton)
             .store(in: &subscriptions)
         
         // show/hide loading
@@ -252,8 +259,8 @@ class AddProductViewController: BaseViewController {
                 case .error(let message):
                     self?.showAlert(imageName: nil, title: "Alert", message: message, positiveTitleButton: nil, positiveCompletion: nil)
                     
-                case .addSuccess:
-                    self?.showAlert(title: "Alert", message: "Add product success", positiveTitleButton: nil, positiveCompletion: { [weak self] in
+                case .saveSuccess:
+                    self?.showAlert(title: "Alert", message: "Update product success", positiveTitleButton: nil, positiveCompletion: { [weak self] in
                         DispatchQueue.main.async {
                             self?.navigationController?.popViewController(animated: true)
                         }
@@ -271,8 +278,8 @@ class AddProductViewController: BaseViewController {
         viewModel.action.send(.clear)
     }
     
-    @objc private func addButtonTapped(sender: UIButton) {
-        viewModel.action.send(.addProduct)
+    @objc private func saveButtonTapped(sender: UIButton) {
+        viewModel.action.send(.saveProduct)
     }
     
     // MARK: - Helper functions
@@ -280,7 +287,7 @@ class AddProductViewController: BaseViewController {
 }
 
 //MARK: - UITextFieldDelegate
-extension AddProductViewController: UITextFieldDelegate {
+extension EditProductViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -301,26 +308,7 @@ extension AddProductViewController: UITextFieldDelegate {
 
     @objc
     func textFieldEditingDidChange(_ textField: UITextField) {
-#if DEBUG
-        if textField == skuTextField {
-            let phoneString = textField.text?.trim()
-            switch phoneString {
-            case "11":
-
-                textField.text = "STB-01"
-                productNameTextField.text = "STB-01a"
-                
-                addButton.isEnabled = true
-                addButton.alpha = 1.0
-
-                viewModel.sku = "STB-01"
-                viewModel.productName = "STB-01a"
-
-            default:()
-            }
-        }
-#endif
-
+        //
     }
     
 }
