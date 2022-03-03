@@ -26,6 +26,7 @@ final class ProductsViewModel {
         case didLoadMoreDataSuccess
         case didUpdateDataSuccess(dataModel: ProductModel, atIndex: Int)
         case didDeleteSuccess
+        case didSearchSuccess
         
     }
     
@@ -36,6 +37,7 @@ final class ProductsViewModel {
         case onLoadMoreData
         case onDelete(dataModel: ProductModel, atIndex: Int)
         case onLogout
+        case onSearch(sku: String)
     }
     
     
@@ -92,6 +94,9 @@ final class ProductsViewModel {
             
         case .onLogout:
             self.onLogout()
+            
+        case .onSearch(let sku):
+            self.onSearch(sku: sku)
         }
     }
     
@@ -115,6 +120,9 @@ final class ProductsViewModel {
             print("ViewModel -> State: didUpdateDataSuccess")
         case .didDeleteSuccess:
             print("didDeleteSuccess")
+            
+        case .didSearchSuccess:
+            print("didSearchSuccess")
         }
     }
     
@@ -220,6 +228,49 @@ final class ProductsViewModel {
             .store(in: &dataCancellable)
     }
     
+    
+    private func onSearch(sku: String){
+        DLog("search sku", sku)
+        
+        if sku == "" {
+            getListData()
+            return
+        }
+        
+        dataCancellable = []
+
+        let searchInfo = SearchInfo(sku: sku)
+
+        let postPublisher = try? API.Product.postSearchProduct(searchInfo: searchInfo)
+
+        _ = postPublisher?
+            .sink(receiveCompletion: { (completion) in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                print("DONE - postSearchProduct")
+            }
+        }, receiveValue: { (data, response) in
+            if let string = String(data: data, encoding: .utf8) {
+                print(string)
+                do {
+                    let decoder = JSONDecoder()
+                    let productModel = try decoder.decode(ProductModel.self, from: data)
+                    
+                    self.listModels.removeAll()
+                    self.listModels.append(productModel)
+                    
+                    self.state.send(.didSearchSuccess)
+                    
+                } catch {
+                    self.listModels.removeAll()
+                    self.state.send(.error(message: "Item not exists!"))
+                }
+            }
+        })
+            .store(in: &dataCancellable)
+    }
     
 }
 

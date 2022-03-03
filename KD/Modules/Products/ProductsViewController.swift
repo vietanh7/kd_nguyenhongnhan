@@ -298,6 +298,10 @@ class ProductsViewController: BaseViewController {
                 switch state {
                 case .error(let message):
                     self?.showAlert(imageName: nil, title: "Alert", message: message, positiveTitleButton: nil, positiveCompletion: nil)
+                    DispatchQueue.main.async {
+                        self?.view.endEditing(true)
+                    }
+                    
                     
                 case .didRefreshDataSuccess:
                     self?.didRefreshDataSuccess()
@@ -528,31 +532,35 @@ extension ProductsViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let searchText:String = textField.text ?? ""
-        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
-//            self.interactor.searchListFriend(searchText)
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") { [weak self] _ in
+            //DLog("search text", searchText)
+//            self?.viewModel.action.send(.onSearch(sku: searchText))
         }
     }
     
     @objc func textFieldDidEndEditing(_ textField: UITextField) {
         let searchText:String = textField.text ?? ""
-        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
-//            self.interactor.searchListFriend(searchText)
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") { [weak self] _ in
+//            DLog("search text", searchText)
+//            self?.viewModel.action.send(.onSearch(sku: searchText))
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         let searchText:String = textField.text ?? ""
-        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
-//            self.interactor.searchListFriend(searchText)
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {[weak self] _ in
+            DLog("search text", searchText)
+            self?.viewModel.action.send(.onSearch(sku: searchText))
         }
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let searchText:String = textField.text ?? ""
-        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
-//            self.interactor.searchListFriend(searchText)
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {[weak self] _ in
+            DLog("search text", searchText)
+//            self?.viewModel.action.send(.onSearch(sku: searchText))
         }
         return true
     }
@@ -560,8 +568,9 @@ extension ProductsViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         let searchText:String = ""
         self.searchBar.text = ""
-        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {_ in
-//            self.interactor.searchListFriend(searchText)
+        Debounce<String>.input(searchText, comparedAgainst: self.searchBar.text ?? "") {[weak self] _ in
+            DLog("search text", searchText)
+//            self?.viewModel.action.send(.onSearch(sku: searchText))
         }
         return false
     }
