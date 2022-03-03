@@ -519,13 +519,6 @@ extension ProductsViewController: EditProductViewControllerDelegate {
             self.tableView.reloadData()
         }
     }
-
-//    func onDeleteButtonTapped(dataModel: BasicModel) {
-//        if let index = viewModel.listModels.firstIndex(where: {$0 === dataModel}) {
-//            viewModel.listModels.remove(at: index)
-//            //self.didDeleteCellAtIndex(index: index)
-//        }
-//    }
 }
 
 extension ProductsViewController: UITextFieldDelegate {

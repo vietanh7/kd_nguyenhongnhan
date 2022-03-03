@@ -12,7 +12,6 @@ struct API {
     
     //MARK: - Config
     struct Config {
-        static let baseURL = "https://jsonplaceholder.typicode.com/"
         static let endPointURL = "https://hoodwink.medkomtek.net/api/"
     }
     

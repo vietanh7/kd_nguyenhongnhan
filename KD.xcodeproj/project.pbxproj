@@ -23,7 +23,6 @@
 		3B0E13AF27CF4047007A05B8 /* String_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13A727CF4047007A05B8 /* String_EXT.swift */; };
 		3B0E13B027CF4048007A05B8 /* UIColor_EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13A827CF4047007A05B8 /* UIColor_EXT.swift */; };
 		3B0E13B327CF415A007A05B8 /* VW_LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13B227CF415A007A05B8 /* VW_LoadingAnimation.swift */; };
-		3B0E13B727CF4170007A05B8 /* ExampleNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13B527CF4170007A05B8 /* ExampleNavigationViewController.swift */; };
 		3B0E13B827CF4170007A05B8 /* BasicAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */; };
 		3B0E143627CF4D7B007A05B8 /* ApplicationMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E143527CF4D7B007A05B8 /* ApplicationMacros.swift */; };
 		3B0E144227CF5421007A05B8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E144027CF5421007A05B8 /* LoginViewModel.swift */; };
@@ -36,9 +35,7 @@
 		3B0E145427CF572D007A05B8 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145327CF572D007A05B8 /* PasswordTextField.swift */; };
 		3B0E145827CF5DA9007A05B8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */; };
 		3B0E145927CF5DA9007A05B8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */; };
-		3B0E146427CF6091007A05B8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145D27CF6091007A05B8 /* UserModel.swift */; };
 		3B0E146527CF6091007A05B8 /* API.Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E145F27CF6091007A05B8 /* API.Request.swift */; };
-		3B0E146727CF6091007A05B8 /* API.User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146127CF6091007A05B8 /* API.User.swift */; };
 		3B0E146827CF6091007A05B8 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146227CF6091007A05B8 /* API.swift */; };
 		3B0E146C27CF640D007A05B8 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146A27CF640D007A05B8 /* ProductCellViewModel.swift */; };
 		3B0E146D27CF640D007A05B8 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E146B27CF640D007A05B8 /* ProductTableViewCell.swift */; };
@@ -116,7 +113,6 @@
 		3B0E13A727CF4047007A05B8 /* String_EXT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_EXT.swift; sourceTree = "<group>"; };
 		3B0E13A827CF4047007A05B8 /* UIColor_EXT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_EXT.swift; sourceTree = "<group>"; };
 		3B0E13B227CF415A007A05B8 /* VW_LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VW_LoadingAnimation.swift; sourceTree = "<group>"; };
-		3B0E13B527CF4170007A05B8 /* ExampleNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleNavigationViewController.swift; sourceTree = "<group>"; };
 		3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAlertViewController.swift; sourceTree = "<group>"; };
 		3B0E143527CF4D7B007A05B8 /* ApplicationMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationMacros.swift; sourceTree = "<group>"; };
 		3B0E144027CF5421007A05B8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -129,9 +125,7 @@
 		3B0E145327CF572D007A05B8 /* PasswordTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3B0E145627CF5DA9007A05B8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3B0E145727CF5DA9007A05B8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		3B0E145D27CF6091007A05B8 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3B0E145F27CF6091007A05B8 /* API.Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.Request.swift; sourceTree = "<group>"; };
-		3B0E146127CF6091007A05B8 /* API.User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.User.swift; sourceTree = "<group>"; };
 		3B0E146227CF6091007A05B8 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3B0E146A27CF640D007A05B8 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		3B0E146B27CF640D007A05B8 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -251,21 +245,13 @@
 		3B0E13B127CF415A007A05B8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */,
 				3B0E148027CF6DD7007A05B8 /* NoResultView.swift */,
 				3B0E145327CF572D007A05B8 /* PasswordTextField.swift */,
 				3B0E13B227CF415A007A05B8 /* VW_LoadingAnimation.swift */,
 				3B0E148227CF857B007A05B8 /* SearchBarTxt.swift */,
 			);
 			path = SubViews;
-			sourceTree = "<group>";
-		};
-		3B0E13B427CF4170007A05B8 /* BasicAlert */ = {
-			isa = PBXGroup;
-			children = (
-				3B0E13B527CF4170007A05B8 /* ExampleNavigationViewController.swift */,
-				3B0E13B627CF4170007A05B8 /* BasicAlertViewController.swift */,
-			);
-			path = BasicAlert;
 			sourceTree = "<group>";
 		};
 		3B0E143B27CF4FDC007A05B8 /* Application */ = {
@@ -352,7 +338,6 @@
 		3B0E145B27CF6091007A05B8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				3B0E145D27CF6091007A05B8 /* UserModel.swift */,
 				3B0E148627CFAC5B007A05B8 /* LoginInfo.swift */,
 				3B0E148827CFAC71007A05B8 /* RegisterInfo.swift */,
 				3B0E149D27CFD3A9007A05B8 /* AddProductInfo.swift */,
@@ -371,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				3B0E145F27CF6091007A05B8 /* API.Request.swift */,
-				3B0E146127CF6091007A05B8 /* API.User.swift */,
 				3B0E148A27CFAD10007A05B8 /* API.Authen.swift */,
 				3B0E149227CFB7C7007A05B8 /* API.Product.swift */,
 				3B0E146227CF6091007A05B8 /* API.swift */,
@@ -391,6 +375,7 @@
 		3B0E147027CF6CFF007A05B8 /* BasicTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				3B0E147D27CF6DAD007A05B8 /* BasicModel */,
 				3B0E147127CF6CFF007A05B8 /* RegularTableViewCell.swift */,
 				3B0E147227CF6CFF007A05B8 /* HeaderFooterSection.swift */,
 				3B0E147327CF6CFF007A05B8 /* SkeletonTableViewCell.swift */,
@@ -454,12 +439,10 @@
 				3BFFC88D27CF030A0065C6BA /* AppDelegate.swift */,
 				3BFFC89127CF030A0065C6BA /* ViewController.swift */,
 				3B0E143B27CF4FDC007A05B8 /* Application */,
-				3B0E13B427CF4170007A05B8 /* BasicAlert */,
 				3B0E13B127CF415A007A05B8 /* SubViews */,
 				3B0E147027CF6CFF007A05B8 /* BasicTableViewCells */,
 				3B0E13A027CF4047007A05B8 /* Extensions */,
 				3B0E144427CF54ED007A05B8 /* Utils */,
-				3B0E147D27CF6DAD007A05B8 /* BasicModel */,
 				3B0E145A27CF606F007A05B8 /* Models */,
 				3B0E143C27CF4FF5007A05B8 /* Modules */,
 				3BFFC89627CF030E0065C6BA /* Assets.xcassets */,
@@ -736,7 +719,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B0E148D27CFAE75007A05B8 /* LoginResponseModel.swift in Sources */,
-				3B0E146727CF6091007A05B8 /* API.User.swift in Sources */,
 				3B0E147727CF6CFF007A05B8 /* HeaderFooterSection.swift in Sources */,
 				3B0E147627CF6CFF007A05B8 /* RegularTableViewCell.swift in Sources */,
 				3B0E14A027CFD637007A05B8 /* ErrorModel.swift in Sources */,
@@ -771,7 +753,6 @@
 				3B0E13B027CF4048007A05B8 /* UIColor_EXT.swift in Sources */,
 				3B0E144F27CF54ED007A05B8 /* NetworkManager.swift in Sources */,
 				3B0E149327CFB7C7007A05B8 /* API.Product.swift in Sources */,
-				3B0E146427CF6091007A05B8 /* UserModel.swift in Sources */,
 				3B0E14A727D0606E007A05B8 /* SearchInfo.swift in Sources */,
 				3B0E147827CF6CFF007A05B8 /* SkeletonTableViewCell.swift in Sources */,
 				3B0E147927CF6CFF007A05B8 /* SkeletonHeaderFooterSection.swift in Sources */,
@@ -783,7 +764,6 @@
 				3B0E145827CF5DA9007A05B8 /* SignUpViewController.swift in Sources */,
 				3B0E147A27CF6CFF007A05B8 /* PhotoTableViewCell.swift in Sources */,
 				3B0E147F27CF6DAD007A05B8 /* BasicModel.swift in Sources */,
-				3B0E13B727CF4170007A05B8 /* ExampleNavigationViewController.swift in Sources */,
 				3B0E149E27CFD3A9007A05B8 /* AddProductInfo.swift in Sources */,
 				3B0E149C27CFCF3C007A05B8 /* AddProductViewModel.swift in Sources */,
 				3B0E139627CF3CB0007A05B8 /* SplashViewController.swift in Sources */,
