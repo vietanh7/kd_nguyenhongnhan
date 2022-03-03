@@ -178,7 +178,7 @@ final class ProductsViewModel {
                     // Remove data & reload layout
                     self.listModels.remove(at: atIndex)
                 } catch {
-                    self.state.send(.error(message: "Item not exists!"))
+                    self.state.send(.error(message: string))
                 }
             }
         })
